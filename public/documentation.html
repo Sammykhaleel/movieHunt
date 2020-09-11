@@ -3,7 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Movie Hunt</title>
+    <style>
+      th,
+      tr,
+      td {
+        border: 1px black solid;
+      }
+
+      tr,
+      td {
+        font-size: 14px;
+      }
+
+      .format {
+        font-size: 12px;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -15,5 +32,203 @@
       deregister. Registered users will be able to add movies to their list of
       favorites.
     </p>
+
+    <table>
+      <tr>
+        <th>Request</th>
+        <th>URL</th>
+        <th>HTTP Method</th>
+        <th>Request body data format</th>
+        <th>Response body data format</th>
+      </tr>
+      <tr>
+        <td>
+          Return all movies<br />
+          (20 movies per page by default)
+        </td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td></td>
+        <td class="format">
+          Array of JSON object<br />
+          {<br />
+          &nbsp&nbsp&nbsp movies : <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp [{ <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp title : "Inception",<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp genre : "Sci-fi",
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp director : "Christopher
+          Nolan", <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp id : "23psdojf" <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp }]<br />
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Return all data of a movie by title</td>
+        <td>/movies/data/:title</td>
+        <td>GET</td>
+        <td></td>
+        <td class="format">
+          Array of JSON object<br />
+          {<br />
+          &nbsp&nbsp&nbsp movieData : <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp [{ <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp title : "Inception",<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp description : "Dom Cobb
+          (Leonardo DiCaprio) is a thief...",<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp genre : "Sci-fi",
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp director : "Christopher
+          Nolan", <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp imgURL :
+          "https://...jpg", <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp featured : "true" ||
+          "false", <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp id : "23psdojf" <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp }]<br />
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Return a genre's description by genre name</td>
+        <td>/genres/:genre</td>
+        <td>GET</td>
+        <td></td>
+        <td class="format">
+          JSON object<br />
+          {<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp name : "Sci-fi",
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp description : "Science fiction (or
+          sci-fi) is a film genre that uses speculative..." <br />
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Return a director's data by name</td>
+        <td>/directors/:directorName</td>
+        <td>GET</td>
+        <td></td>
+        <td class="format">
+          JSON object<br />
+          {<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp director : "Christopher Nolan", <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp dob : "July 30, 1970",<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp dod : null,
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp bio : "Best known for his cerebral,
+          often nonlinear, storytelling, acclaimed writer-director........"<br />
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>New user register</td>
+        <td>/users/new</td>
+        <td>POST</td>
+        <td class="format">
+          JSON object<br />
+          *User name has to be all lower case w/o spaces<br />
+          *Password should be at least 6 characters<br /><br />
+          {<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp username : "New_user_name", <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp password : "******",<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp email : 123@456.com,
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp dob : "MM/DD/YYYY"<br />
+          }
+        </td>
+        <td class="format">
+          Confirmation message<br /><br /><br />
+
+          *On success<br />
+          &nbsp&nbsp&nbsp "New user {username} has been registered!"
+          <br /><br />
+          *On error<br />
+          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
+          &nbsp&nbsp&nbsp + error code
+        </td>
+      </tr>
+      <tr>
+        <td>Update user info</td>
+        <td>/users/:username</td>
+        <td>PUT</td>
+        <td class="format">
+          JSON object<br />
+          *User name has to be all lower case w/o spaces<br />
+          *Password should be at least 6 characters<br /><br />
+          {<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp username : "user_name", <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp password : "******",<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp email : 123@456.com,
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp dob : "MM/DD/YYYY"<br />
+          }
+        </td>
+        <td class="format">
+          Confirmation message<br /><br /><br />
+
+          *On success<br />
+          &nbsp&nbsp&nbsp "{username} has been updated!"
+          <br /><br />
+          *On error<br />
+          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
+          &nbsp&nbsp&nbsp + error code
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Add a movie to favorite list <br />(Favorite list only available for
+          registered users)
+        </td>
+        <td>/users/:username/favorite/:movieID</td>
+        <td>PUT</td>
+        <td></td>
+        <td class="format">
+          Confirmation message<br /><br /><br />
+
+          *On success<br />
+          &nbsp&nbsp&nbsp "{movieName} has been added to {username}'s favorite
+          list!"
+          <br /><br />
+          *On error<br />
+          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
+          &nbsp&nbsp&nbsp + error code
+        </td>
+      </tr>
+      <tr>
+        <td>Remove a movie from favorite list</td>
+        <td>/users/:username/favorite/:movieID</td>
+        <td>DELTE</td>
+        <td></td>
+        <td class="format">
+          Confirmation message<br /><br /><br />
+
+          *On success<br />
+          &nbsp&nbsp&nbsp "{movieName} has been removed from {username}'s
+          favorite list!"
+          <br /><br />
+          *On error<br />
+          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
+          &nbsp&nbsp&nbsp + error code
+        </td>
+      </tr>
+      <tr>
+        <td>Deregister existing user</td>
+        <td>/users/:username</td>
+        <td>DELTE</td>
+        <td></td>
+        <td class="format">
+          Confirmation message<br /><br /><br />
+
+          *On success<br />
+          &nbsp&nbsp&nbsp "{username} has been deregisterd"
+          <br /><br />
+          *On error<br />
+          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
+          &nbsp&nbsp&nbsp + error code
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
