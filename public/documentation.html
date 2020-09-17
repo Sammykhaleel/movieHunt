@@ -52,7 +52,7 @@
         <td class="format">
           Array of JSON object<br />
           {<br />
-          &nbsp&nbsp&nbsp "_id" : { "$oid": "5f603e51b9c87ebe8a5bba37" },<br />
+          &nbsp&nbsp&nbsp ""_id"" : { "$oid": "5f603e51b9c87ebe8a5bba37" },<br />
           &nbsp&nbsp&nbsp "Title" : "The Wolf of Wall Street",<br />
           &nbsp&nbsp&nbsp "Description" : "In 1987, Jordan Belfort (Leonardo
           DiCaprio) takes an entry-level job at a Wall Street brokerage firm...,
@@ -82,11 +82,11 @@
           <br />
           &nbsp&nbsp&nbsp "Featured" : true, <br />
           &nbsp&nbsp&nbsp "Actors" : [ <br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp { "$oid": "5f603b0eb9c87ebe8a5bba16" },
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp "Leonardo Di Caprio",
           <br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp { "$oid": "5f603b0eb9c87ebe8a5bba17" },
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp "Jonah Hill",
           <br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp { "$oid": "5f603b0eb9c87ebe8a5bba18" }
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp "Margot Robbie"
           <br />
           &nbsp&nbsp&nbsp ], <br />
           &nbsp&nbsp&nbsp "ReleaseDate" : "2013-12-25", <br />
@@ -96,8 +96,8 @@
         </td>
       </tr>
       <tr>
-        <td>Return all data of a movie by title</td>
-        <td>/movies/data/:title</td>
+        <td>Return a movie by title</td>
+        <td>/movies/:Title</td>
         <td>GET</td>
         <td></td>
         <td class="format">
@@ -136,59 +136,75 @@
         </td>
       </tr>
       <tr>
+        <td>Get all users</td>
+        <td>/users</td>
+        <td>GET</td>
+        <td class="format"></td>
+        <td class="format">
+          JSON object<br />
+          {<br />
+          &nbsp&nbsp&nbsp "_id" : "userID", <br />
+          &nbsp&nbsp&nbsp "Username" : "user_name", <br />
+          &nbsp&nbsp&nbsp "Password" : "******",<br />
+          &nbsp&nbsp&nbsp "Email" : "123@456.com",
+          <br />
+          &nbsp&nbsp&nbsp "Birthday" : "YYYY-MM-DD"<br />
+          &nbsp&nbsp&nbsp "FavoriteMovies" : []<br />
+          }<br />
+        </td>
+      </tr>
+      <tr>
         <td>New user register</td>
-        <td>/users/new</td>
+        <td>/users</td>
         <td>POST</td>
         <td class="format">
           JSON object<br />
           *User name has to be all lower case w/o spaces<br />
           *Password should be at least 6 characters<br /><br />
           {<br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Username : "New_user_name", <br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Password : "******",<br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Email : 123@456.com,
+          &nbsp&nbsp&nbsp "Username" : "user_name", <br />
+          &nbsp&nbsp&nbsp "Password" : "******",<br />
+          &nbsp&nbsp&nbsp "Email" : "123@456.com",
           <br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Birthday : "YYYY/MM/DD"<br />
+          &nbsp&nbsp&nbsp "Birthday" : "YYYY-MM-DD"<br />
           }
         </td>
         <td class="format">
-          Confirmation message<br /><br /><br />
-
           *On success<br />
-          &nbsp&nbsp&nbsp "New user {username} has been registered!"<br />
-          &nbsp&nbsp&nbsp "Your user ID is **********"
-          <br /><br />
-          *On error<br />
-          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
-          &nbsp&nbsp&nbsp + error code
+          {<br />
+          &nbsp&nbsp&nbsp "_id" : "userID", <br />
+          &nbsp&nbsp&nbsp "Username" : "user_name", <br />
+          &nbsp&nbsp&nbsp "Password" : "******",<br />
+          &nbsp&nbsp&nbsp "Email" : "123@456.com",
+          <br />
+          &nbsp&nbsp&nbsp "Birthday" : "YYYY-MM-DD"<br />
+          &nbsp&nbsp&nbsp "FavoriteMovies" : []<br />
+          }<br />
+          <br />*On error<br />
+          &nbsp&nbsp&nbsp Error + error code<br /><br />
         </td>
       </tr>
       <tr>
         <td>Update user info</td>
-        <td>/users/:userID</td>
+        <td>/users/:UserID</td>
         <td>PUT</td>
         <td class="format">
           JSON object<br />
           *User name has to be all lower case w/o spaces<br />
           *Password should be at least 6 characters<br /><br />
           {<br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp _id : "userID", <br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Username : "user_name", <br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Password : "******",<br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Email : 123@456.com,
+          &nbsp&nbsp&nbsp "_id" : "userID", <br />
+          &nbsp&nbsp&nbsp "Username" : "user_name", <br />
+          &nbsp&nbsp&nbsp "Password" : "******",<br />
+          &nbsp&nbsp&nbsp "Email" : "123@456.com",
           <br />
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Birthday : "YYYY/MM/DD"<br />
+          &nbsp&nbsp&nbsp "Birthday" : "YYYY-MM-DD"<br />
           }
         </td>
         <td class="format">
-          Confirmation message<br /><br /><br />
-
-          *On success<br />
-          &nbsp&nbsp&nbsp "{username} / {userID} has been updated!"
-          <br /><br />
-          *On error<br />
-          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
-          &nbsp&nbsp&nbsp + error code
+          <br />
+          JSON object<br /><br />
+          Same as above<br /><br />
         </td>
       </tr>
       <tr>
@@ -196,36 +212,36 @@
           Add a movie to favorite list <br />(Favorite list only available for
           registered users)
         </td>
-        <td>/users/:userID/favorite/:movieID</td>
+        <td>/users/:userID/favorite/add/:movieID</td>
         <td>PUT</td>
         <td></td>
         <td class="format">
-          Confirmation message<br /><br /><br />
-
           *On success<br />
-          &nbsp&nbsp&nbsp "{movieName} / {movieID} has been added to
-          {username}'s / {userID} favorite list!"
-          <br /><br />
+          {<br />
+          &nbsp&nbsp&nbsp "_id" : "userID", <br />
+          &nbsp&nbsp&nbsp "Username" : "user_name", <br />
+          &nbsp&nbsp&nbsp "Password" : "******",<br />
+          &nbsp&nbsp&nbsp "Email" : "123@456.com",
+          <br />
+          &nbsp&nbsp&nbsp "Birthday" : "YYYY-MM-DD"<br />
+          &nbsp&nbsp&nbsp "FavoriteMovies" : ["movieID"]<br />
+          }<br /><br />
           *On error<br />
-          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
-          &nbsp&nbsp&nbsp + error code
+          &nbsp&nbsp&nbsp Error + error code
         </td>
       </tr>
       <tr>
         <td>Remove a movie from favorite list</td>
-        <td>/users/:userID/favorite/:movieID</td>
-        <td>DELETE</td>
+        <td>/users/:userID/favorite/remove/:movieID</td>
+        <td>PUT</td>
         <td></td>
         <td class="format">
-          Confirmation message<br /><br /><br />
-
           *On success<br />
-          &nbsp&nbsp&nbsp "{movieName} / {movieID} has been removed from
-          {username}'s / {userID} favorite list!"
-          <br /><br />
+          <br />
+          JSON object<br /><br />
+          Same as above<br /><br />
           *On error<br />
-          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
-          &nbsp&nbsp&nbsp + error code
+          &nbsp&nbsp&nbsp Error + error code
         </td>
       </tr>
       <tr>
@@ -240,8 +256,7 @@
           &nbsp&nbsp&nbsp "{username} / {userID} has been deregisterd"
           <br /><br />
           *On error<br />
-          &nbsp&nbsp&nbsp "Error occurred. Please try again."<br />
-          &nbsp&nbsp&nbsp + error code
+          &nbsp&nbsp&nbsp Error + error code
         </td>
       </tr>
     </table>
