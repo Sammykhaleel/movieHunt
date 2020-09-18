@@ -2,12 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-
+const passport = require('passport');
 const app = express();
 app.use(bodyParser.json());
 const Movies = Models.Moive;
 const Users = Models.Users;
 const Director = Models.Director;
+
+let auth = require('./auth')(app);
+require('./passport');
 
 mongoose.connect('mongodb://localhost:27017/movieHuntDB', {
   useNewUrlParser: true,
