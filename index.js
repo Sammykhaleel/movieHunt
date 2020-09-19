@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const passport = require('passport');
+require('./passport');
+
 const app = express();
 app.use(bodyParser.json());
 const Movies = Models.Moive;
@@ -10,7 +12,6 @@ const Users = Models.Users;
 const Director = Models.Director;
 
 let auth = require('./auth')(app);
-require('./passport');
 
 mongoose.connect('mongodb://localhost:27017/movieHuntDB', {
   useNewUrlParser: true,
@@ -43,16 +44,20 @@ app.get('users/:Username', (req, res) => {
 });
 
 // Get all movies
-app.get('/movies', (req, res) => {
-  Movies.find()
-    .then((movies) => {
-      res.status(200).json(movies);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
-});
+app.get(
+  '/movies',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Movies.find()
+      .then((movies) => {
+        res.status(200).json(movies);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  }
+);
 
 // Get a movie by title
 app.get('/movies/:Title', (req, res) => {
@@ -67,16 +72,20 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 // Get all directors
-app.get('/directors', (req, res) => {
-  Director.find()
-    .then((directors) => {
-      res.status(200).json(directors);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ', err);
-    });
-});
+app.get(
+  '/directors',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Director.find()
+      .then((directors) => {
+        res.status(200).json(directors);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ', err);
+      });
+  }
+);
 
 // Get a director by id
 app.get('/directors/:directorID', (req, res) => {
