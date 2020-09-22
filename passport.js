@@ -7,6 +7,8 @@ let Users = Models.Users,
   JWTStrategy = passportJWT.Strategy,
   ExtractJWT = passportJWT.ExtractJwt;
 
+// Takes username and pwd from request body to check if the user already exists.
+// This will receive hashed password
 passport.use(
   new LocalStrategy(
     {
@@ -26,16 +28,22 @@ passport.use(
             message: 'Incorrect username or password.',
           });
         }
-        console.log('finished');
+        if (!user.validatePassword(password)) {
+          console.log('incorrect password');
+          return callback(null, false, { message: 'Incorrect password.' });
+        }
+        console.log('finished', user);
         return callback(null, user);
       });
     }
   )
 );
 
+// Authenticate user using JWT submitted along the request.
 passport.use(
   new JWTStrategy(
     {
+      // Extracts JWT from HTTP request header
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey: 'secret',
     },
