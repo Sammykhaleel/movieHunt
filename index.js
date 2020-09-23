@@ -33,7 +33,13 @@ app.use(
 require('./passport');
 let auth = require('./auth')(app);
 
-mongoose.connect('mongodb://localhost:27017/movieHuntDB', {
+// mongoose.connect('mongodb://localhost:27017/movieHuntDB', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: true,
+// });
+
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
