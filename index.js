@@ -11,24 +11,24 @@ const Director = Models.Director;
 const { check, validationResult } = require('express-validator');
 
 app.use(bodyParser.json());
-// app.use(cors());
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+app.use(cors());
+// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        // If a specific origin isn’t found on the list of allowed origins
-        let message =
-          'The CORS policy for this application doesn’t allow access from origin ' +
-          origin;
-        return callback(new Error(message), false);
-      }
-      return callback(null, true);
-    },
-  })
-);
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         // If a specific origin isn’t found on the list of allowed origins
+//         let message =
+//           'The CORS policy for this application doesn’t allow access from origin ' +
+//           origin;
+//         return callback(new Error(message), false);
+//       }
+//       return callback(null, true);
+//     },
+//   })
+// );
 
 require('./passport');
 let auth = require('./auth')(app);
@@ -132,19 +132,19 @@ app.post(
     check('Username', 'Username is required. Min 4 characters').isLength({
       min: 4,
     }),
-    check('Username', "Username can't contain any spaces").notEmpty(),
+    check('Username', 'Username is required').not().isEmpty(),
     check('Username', 'Username has to be in all lowercases').isLowercase(),
     check(
       'Username',
       'Username contains non alphanumeric characters - not allowed.'
     ).isAlphanumeric(),
-    check('Password', 'Password is required').notEmpty(),
+    check('Password', 'Password is required').not().isEmpty(),
     check(
       'Password',
       'Password contains non alphanumeric characters - not allowed.'
     ).isAlphanumeric(),
     check('Email', 'Email does not appear to be valid').isEmail(),
-    check('Birthday', 'Invalid date format. Use YYYY/MM/DD').isDate(),
+    check('Birthday', 'Invalid date format. Use YYYY-MM-DD').isDate(),
   ],
   (req, res) => {
     // Check the validation object for errors
@@ -152,7 +152,7 @@ app.post(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-    console.log('req body', req.body);
+
     // Hash the password received from the request
     let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
@@ -191,13 +191,13 @@ app.put(
     check('Username', 'Username is required. Min 4 characters').isLength({
       min: 4,
     }),
-    check('Username', "Username can't contain any spaces").notEmpty(),
+    check('Username', 'Username is required').not().isEmpty(),
     check('Username', 'Username has to be in all lowercases').isLowercase(),
     check(
       'Username',
       'Username contains non alphanumeric characters - not allowed.'
     ).isAlphanumeric(),
-    check('Password', 'Password is required').notEmpty(),
+    check('Password', 'Password is required').not().isEmpty(),
     check(
       'Password',
       'Password contains non alphanumeric characters - not allowed.'

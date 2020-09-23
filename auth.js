@@ -1,6 +1,7 @@
 const jwtSecret = 'secret';
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const { check, validationResult } = require('express-validator');
 
 require('./passport.js');
 
@@ -18,21 +19,50 @@ let generateJWTToken = (user) => {
     req.login -- establish a session
 */
 module.exports = (router) => {
-  router.post('/login', (req, res) => {
-    passport.authenticate('local', { session: false }, (error, user, info) => {
-      if (error || !user) {
-        return res.status(400).json({
-          message: 'Something is not right',
-          user: user,
-        });
+  router.post(
+    '/login',
+    [
+      check('Username', 'Username is required. Min 4 characters').isLength({
+        min: 4,
+      }),
+      check('Username', 'Username is required').not().isEmpty(),
+      check('Username', 'Username has to be in all lowercases').isLowercase(),
+      check(
+        'Username',
+        'Username contains non alphanumeric characters - not allowed.'
+      ).isAlphanumeric(),
+      check('Password', 'Password is required').not().isEmpty(),
+      check(
+        'Password',
+        'Password contains non alphanumeric characters - not allowed.'
+      ).isAlphanumeric(),
+    ],
+    (req, res) => {
+      // Check the validation object for errors
+      let errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
       }
-      req.login(user, { session: false }, (error) => {
-        if (error) {
-          res.send(error);
+
+      passport.authenticate(
+        'local',
+        { session: false },
+        (error, user, info) => {
+          if (error || !user) {
+            return res.status(400).json({
+              message: 'Something is not right',
+              user: user,
+            });
+          }
+          req.login(user, { session: false }, (error) => {
+            if (error) {
+              res.send(error);
+            }
+            let token = generateJWTToken(user.toJSON());
+            return res.json({ user, token });
+          });
         }
-        let token = generateJWTToken(user.toJSON());
-        return res.json({ user, token });
-      });
-    })(req, res);
-  });
+      )(req, res);
+    }
+  );
 };
