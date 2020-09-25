@@ -39,10 +39,23 @@ let auth = require('./auth')(app);
 //   useFindAndModify: true,
 // });
 
-mongoose.connect(process.env.CONNECTION_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: true,
+// mongoose.connect(process.env.CONNECTION_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: true,
+// });
+
+mongoose.connect(
+  'mongodb+srv://zizm111:zizm111@gcdb.xn4hp.mongodb.net/movieHuntDB?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true,
+  }
+);
+
+app.get('/', function (req, res) {
+  res.send('Welcome to Flix Fix!');
 });
 
 // Get all users
@@ -57,17 +70,21 @@ app.get('/users', (req, res) => {
     });
 });
 
-// Get a user by username
-app.get('users/:Username', (req, res) => {
-  Users.find({ Username: req.params.Username })
-    .then((user) => {
-      res.status(200).json(user);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
-});
+//get a user by username
+app.get(
+  '/users/:Username',
+  passport.authenticate('jwt', { session: false }),
+  function (req, res) {
+    Users.findOne({ Username: req.params.Username })
+      .then(function (user) {
+        res.json(user);
+      })
+      .catch(function (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  }
+);
 
 // Get all movies
 app.get(
@@ -97,6 +114,17 @@ app.get('/movies/:Title', (req, res) => {
     });
 });
 
+app.get('/movies/genres/:Name', function (req, res) {
+  Movies.findOne({ 'Genre.Name': req.params.Name })
+    .then(function (movies) {
+      res.json(movies.Genre);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
 // Get all directors
 app.get(
   '/directors',
@@ -112,6 +140,17 @@ app.get(
       });
   }
 );
+
+app.get('/movies/director/:Name', function (req, res) {
+  Movies.findOne({ 'Director.Name': req.params.Name })
+    .then(function (movies) {
+      res.json(movies);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
 
 // Get a director by id
 app.get('/directors/:directorID', (req, res) => {
@@ -186,7 +225,7 @@ app.post(
 
 // Update user info by user ID
 app.put(
-  '/users/:userID',
+  '/users/:Username',
   [
     check('Username', 'Username is required. Min 4 characters').isLength({
       min: 4,
@@ -212,7 +251,7 @@ app.put(
       return res.status(422).json({ errors: errors.array() });
     }
     Users.findOneAndUpdate(
-      { _id: req.params.userID },
+      { Username: req.params.Username },
       {
         $set: {
           Username: req.body.Username,
@@ -280,11 +319,11 @@ app.put('/users/:userID/favorite/remove/:movieID', (req, res) => {
 });
 
 // Deregister a user
-app.delete('/users/:userID', (req, res) => {
-  Users.findOneAndRemove({ _id: req.params.userID })
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
-        res.status(400).send(req.params.userID + ' was not found!');
+        res.status(400).send(req.params.Username + ' was not found!');
       } else {
         res
           .status(200)
