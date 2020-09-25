@@ -9,12 +9,11 @@ let movieSchema = mongoose.Schema({
     Birth: String,
     Death: String,
   },
-  Genre: [
-    {
-      Name: String,
-      Description: String,
-    },
-  ],
+  Genre: {
+    Name: String,
+    Description: String,
+  },
+
   ImageURL: String,
   Featured: Boolean,
   Actors: [String],
@@ -41,17 +40,8 @@ userSchema.methods.validatePassword = function (password) {
   return bcrypt.compareSync(password, this.Password);
 };
 
-let directorSchema = mongoose.Schema({
-  Name: { type: String, required: true },
-  Bio: String,
-  Birth: String,
-  Death: String,
-});
-
 let Movie = mongoose.model('Movie', movieSchema);
 let Users = mongoose.model('User', userSchema);
-let Director = mongoose.model('Director', directorSchema);
 
 module.exports.Moive = Movie;
 module.exports.Users = Users;
-module.exports.Director = Director;

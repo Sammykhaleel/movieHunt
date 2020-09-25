@@ -7,7 +7,6 @@ const cors = require('cors');
 const app = express();
 const Movies = Models.Moive;
 const Users = Models.Users;
-const Director = Models.Director;
 const { check, validationResult } = require('express-validator');
 
 app.use(bodyParser.json());
@@ -44,15 +43,6 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
   useFindAndModify: true,
 });
-
-// mongoose.connect(
-//   'mongodb+srv://zizm111:zizm111@gcdb.xn4hp.mongodb.net/movieHuntDB?retryWrites=true&w=majority',
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: true,
-//   }
-// );
 
 app.get('/', function (req, res) {
   res.send('Welcome to Flix Fix!');
@@ -114,6 +104,7 @@ app.get('/movies/:Title', (req, res) => {
     });
 });
 
+// Get movie genres by genre name
 app.get('/movies/genres/:Name', function (req, res) {
   Movies.findOne({ 'Genre.Name': req.params.Name })
     .then(function (movies) {
@@ -125,40 +116,13 @@ app.get('/movies/genres/:Name', function (req, res) {
     });
 });
 
-// Get all directors
-app.get(
-  '/directors',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    Director.find()
-      .then((directors) => {
-        res.status(200).json(directors);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send('Error: ', err);
-      });
-  }
-);
-
+// Get directors by name
 app.get('/movies/director/:Name', function (req, res) {
   Movies.findOne({ 'Director.Name': req.params.Name })
     .then(function (movies) {
       res.json(movies);
     })
     .catch(function (err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
-});
-
-// Get a director by id
-app.get('/directors/:directorID', (req, res) => {
-  Director.find({ _id: req.params.directorID })
-    .then((director) => {
-      res.status(200).json(director);
-    })
-    .catch((err) => {
       console.error(err);
       res.status(500).send('Error: ' + err);
     });
