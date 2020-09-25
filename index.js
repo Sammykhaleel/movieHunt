@@ -39,20 +39,20 @@ let auth = require('./auth')(app);
 //   useFindAndModify: true,
 // });
 
-// mongoose.connect(process.env.CONNECTION_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: true,
-// });
+mongoose.connect(process.env.CONNECTION_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: true,
+});
 
-mongoose.connect(
-  'mongodb+srv://zizm111:zizm111@gcdb.xn4hp.mongodb.net/movieHuntDB?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true,
-  }
-);
+// mongoose.connect(
+//   'mongodb+srv://zizm111:zizm111@gcdb.xn4hp.mongodb.net/movieHuntDB?retryWrites=true&w=majority',
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: true,
+//   }
+// );
 
 app.get('/', function (req, res) {
   res.send('Welcome to Flix Fix!');
