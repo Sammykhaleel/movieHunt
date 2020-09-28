@@ -1,10 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
 
 export class MainView extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      movies: null,
+      selectedMovie: null,
+    };
   }
 
   componentDidMount() {
@@ -20,16 +25,32 @@ export class MainView extends React.Component {
       });
   }
 
+  onMovieClick(movie) {
+    this.setState({
+      selectedMovie: movie,
+    });
+  }
+
   render() {
-    const { movies } = this.state;
-    if (!movies) return <div className='main-view'></div>;
+    const { movies, selectedMovie } = this.state;
+    if (!movies) return <div className='main-view' />;
+
     return (
       <div className='main-view'>
-        {movies.map((movie) => (
-          <div className='movie-card' key={movie.id}>
-            {movie.Title}
-          </div>
-        ))}
+        {selectedMovie ? (
+          <MovieView
+            movie={selectedMovie}
+            onClick={() => this.setState({ selectedMovie: null })}
+          />
+        ) : (
+          movies.map((movie) => (
+            <MovieCard
+              key={movie._id}
+              movie={movie}
+              onClick={(movie) => this.onMovieClick(movie)}
+            />
+          ))
+        )}
       </div>
     );
   }
