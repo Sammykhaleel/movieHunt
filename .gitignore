@@ -1,4 +1,4 @@
 node_modules
 ignores
 db
-.cache
+client/.cache
