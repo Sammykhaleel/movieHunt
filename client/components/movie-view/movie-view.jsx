@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import './movie-view.scss';
 
 export class MovieView extends React.Component {
   constructor() {
@@ -12,32 +14,49 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className='movie-view'>
-        <img
-          width='500px'
-          src={movie.ImageURL}
-          alt='Movie Poster'
-          className='movie-poster'
-        />
-        <div className='movie-title'>
-          <span className='label'>Title: </span>
-          <span className='value'>{movie.Title}</span>
+      <div className='movieView'>
+        <Button onClick={() => onClick()} variant='dark' className='backBtn'>
+          <i class='fas fa-arrow-left'></i> Back
+        </Button>
+        <div className='movieView-img'>
+          <img
+            width='500px'
+            src={movie.ImageURL}
+            alt='Movie Poster'
+            className='movieView-poster'
+          />
         </div>
-        <div className='movie-description'>
-          <span className='label'>Description: </span>
-          <span className='value'>{movie.Description}</span>
+        <div className='movieView-info'>
+          <div className='movieView-title'>
+            <span className='value'>{movie.Title}</span>
+          </div>
+          <div className='movieView-details'>
+            <div className='movieView-genre'>
+              <span className='label'>Genre: </span>
+              <span className='value'>{movie.Genre.Name}</span>
+            </div>
+            <div className='movieView-release'>
+              <span className='label'>Released Date: </span>
+              <span className='value'>{movie.ReleaseDate}</span>
+            </div>
+            <div className='movieView-director'>
+              <span className='label'>Director: </span>
+              <span className='value'>{movie.Director.Name}</span>
+            </div>
+            <div className='movieView-runtime'>
+              <span className='label'>Run Time: </span>
+              <span className='value'>{movie.RunTime}</span>
+            </div>
+            <div className='movieView-rating'>
+              <span className='label'>IMDb Rating: </span>
+              <span className='value'>{movie.Genre.Name}</span>
+            </div>
+          </div>
+          <div className='movieView-description'>
+            <span className='label'>Description: </span>
+            <span className='value'>{movie.Description}</span>
+          </div>
         </div>
-        <div className='movie-genre'>
-          <span className='label'>Genre:</span>
-          <span className='value'>{movie.Genre.Name}</span>
-        </div>
-        <div className='movie-director'>
-          <span className='label'>Director:</span>
-          <span className='value'>{movie.Director.Name}</span>
-        </div>
-        <button onClick={() => onClick()} className='backBtn'>
-          Back
-        </button>
       </div>
     );
   }

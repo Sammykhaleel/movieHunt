@@ -1,3 +1,125 @@
+.card-body {
+  text-align: center;
+  padding: 8px;
+  background-color: #1d1d1d;
+}
+
+.card-text {
+  margin-bottom: 0;
+  line-height: 1.1;
+  color: white;
+}
+
+.movieCard-img {
+  padding: 5px;
+}
+
+.movieCard-description {
+  padding-top: 10px;
+  text-align: left;
+  font-family: "Bellefair", serif;
+}
+
+.movieCard-button {
+  margin-top: 15px;
+}
+
+.movieCard-title {
+  color: white;
+  font-family: "Pavanam", sans-serif;
+  font-weight: 600;
+}
+
+.movieCard-cardBody .detailInfo {
+  color: white;
+  text-align: right;
+  font-family: "Pavanam", sans-serif;
+  font-size: 12px;
+}
+.movieView-img {
+  display: flex;
+  justify-content: center;
+}
+
+.movieView-img > img {
+  height: 600px;
+  width: auto;
+}
+
+.movieView-title {
+  font-family: "Pavanam", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  text-align: center;
+  color: white;
+}
+
+.movieView-info {
+  padding: 20px 250px 20px 250px;
+  font-family: "Bellefair", serif;
+  color: white;
+}
+
+.movieView-details {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+  font-family: "Bellefair", serif;
+}
+
+.movieView-description {
+  font-size: 20px;
+}
+
+.label {
+  font-family: "Pavanam", sans-serif;
+  font-weight: 600;
+}
+
+.backBtn {
+  margin-left: 250px;
+}
+.login-submitBtn,
+.login-loginBtn {
+  margin: 5px;
+}
+.regstr-submitBtn,
+.regstr-loginBtn {
+  margin: 5px;
+}
+.main-card {
+  margin-bottom: 40px;
+}
+
+.main-title {
+  text-align: center;
+  color: white;
+}
+
+body {
+  background: linear-gradient(to bottom, #121212 15%, #ff99cc 500%);
+}
+
+.nav-link {
+  color: white;
+  box-shadow: 0px 9px 5px -10px #6d6d6d;
+  padding-bottom: 0;
+}
+
+.nav-link:hover {
+  color: white;
+  box-shadow: 0px 6px 4px -4px #6d6d6d;
+  padding-bottom: 0;
+}
+
+.main-nav {
+  margin-bottom: 20px;
+}
+
+.card {
+  box-shadow: 2px 4px 10px -3px #525252;
+  border: none;
+}
 .moviehunt {
   color: steelblue;
 }
