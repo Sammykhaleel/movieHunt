@@ -1,9 +1,17 @@
-$descriptionFont: 'Bellefair', serif;
-$titleFont: 'Pavanam', sans-serif;
+.card {
+  box-shadow: 4px 4px 5px 0px black;
+  border: none;
+}
+
+.card-img-top {
+  background-color: #121212;
+  opacity: 97%;
+}
 .card-body {
   text-align: center;
   padding: 8px;
-  background-color: #1d1d1d;
+  background-color: #121212;
+  opacity: 97%;
 }
 .card-text {
   margin-bottom: 0;
@@ -16,21 +24,22 @@ $titleFont: 'Pavanam', sans-serif;
 .movieCard-description {
   padding-top: 10px;
   text-align: left;
-  font-family: $descriptionFont;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
 }
 .movieCard-button {
   margin-top: 15px;
 }
 .movieCard-title {
   color: white;
-  font-family: $titleFont;
+  font-family: 'Lato', sans-serif;
   font-weight: 600;
 }
 .movieCard-cardBody {
   .detailInfo {
     color: white;
     text-align: right;
-    font-family: $titleFont;
-    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
   }
 }

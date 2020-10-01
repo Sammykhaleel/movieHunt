@@ -14,7 +14,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
-      user: null,
+      user: 1,
       loginPage: false,
     };
     this.toLoginView = this.toLoginView.bind(this);

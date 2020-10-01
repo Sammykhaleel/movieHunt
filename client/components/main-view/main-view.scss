@@ -8,7 +8,8 @@
 }
 
 body {
-  background: linear-gradient(to bottom, #121212 15%, #ff99cc 500%);
+  background-color: #121212;
+  // background: linear-gradient(to bottom, #121212 15%, #ff99cc 500%);
 }
 
 .nav-link {
@@ -25,9 +26,4 @@ body {
 
 .main-nav {
   margin-bottom: 20px;
-}
-
-.card {
-  box-shadow: 2px 4px 10px -3px #525252;
-  border: none;
 }

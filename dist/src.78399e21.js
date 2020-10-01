@@ -46154,7 +46154,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
           movie = _this$props.movie,
           _onClick = _this$props.onClick;
       if (!movie) return null;
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_reactBootstrap.Container, {
         className: "movieView"
       }, _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
@@ -46163,7 +46163,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         variant: "dark",
         className: "backBtn"
       }, _react.default.createElement("i", {
-        "class": "fas fa-arrow-left"
+        className: "fas fa-arrow-left"
       }), " Back"), _react.default.createElement("div", {
         className: "movieView-img"
       }, _react.default.createElement("img", {
@@ -46177,7 +46177,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "movieView-title"
       }, _react.default.createElement("span", {
         className: "value"
-      }, movie.Title)), _react.default.createElement("div", {
+      }, movie.Title)), _react.default.createElement(_reactBootstrap.Row, {
         className: "movieView-details"
       }, _react.default.createElement("div", {
         className: "movieView-genre"
@@ -46211,9 +46211,9 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "value"
       }, movie.Genre.Name))), _react.default.createElement("div", {
         className: "movieView-description"
-      }, _react.default.createElement("span", {
+      }, _react.default.createElement("div", {
         className: "label"
-      }, "Description: "), _react.default.createElement("span", {
+      }, "Description:"), _react.default.createElement("div", {
         className: "value"
       }, movie.Description))));
     }
@@ -46275,7 +46275,9 @@ function LoginView(props) {
     props.onLoggedIn(username);
   };
 
-  return _react.default.createElement(_reactBootstrap.Form, {
+  return _react.default.createElement("div", {
+    className: "login-div"
+  }, _react.default.createElement(_reactBootstrap.Form, {
     className: "login-form"
   }, _react.default.createElement("h1", {
     className: "login-pageTitle"
@@ -46311,7 +46313,7 @@ function LoginView(props) {
     onClick: props.onClickRegister,
     variant: "primary",
     type: "button"
-  }, "Register"));
+  }, "Register")));
 }
 },{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./login-view.scss":"../components/login-view/login-view.scss"}],"../components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -46383,7 +46385,11 @@ function RegistrationView(props) {
     props.onLoggedIn(username);
   };
 
-  return _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement("h1", {
+  return _react.default.createElement("div", {
+    className: "regstr-div"
+  }, _react.default.createElement(_reactBootstrap.Form, {
+    className: "regstr-form"
+  }, _react.default.createElement("h1", {
     className: "regstr-pageTitle"
   }, "Register"), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formUsername"
@@ -46437,7 +46443,7 @@ function RegistrationView(props) {
     onClick: props.onClickLogin,
     variant: "primary",
     type: "button"
-  }, "Login"));
+  }, "Login")));
 }
 },{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./registration-view.scss":"../components/registration-view/registration-view.scss"}],"../components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -46506,7 +46512,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       movies: null,
       selectedMovie: null,
-      user: null,
+      user: 1,
       loginPage: false
     };
     _this.toLoginView = _this.toLoginView.bind(_assertThisInitialized(_this));
@@ -46717,7 +46723,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54344" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54721" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

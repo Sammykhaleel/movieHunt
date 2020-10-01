@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -14,9 +14,9 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className='movieView'>
+      <Container className='movieView'>
         <Button onClick={() => onClick()} variant='dark' className='backBtn'>
-          <i class='fas fa-arrow-left'></i> Back
+          <i className='fas fa-arrow-left'></i> Back
         </Button>
         <div className='movieView-img'>
           <img
@@ -30,7 +30,7 @@ export class MovieView extends React.Component {
           <div className='movieView-title'>
             <span className='value'>{movie.Title}</span>
           </div>
-          <div className='movieView-details'>
+          <Row className='movieView-details'>
             <div className='movieView-genre'>
               <span className='label'>Genre: </span>
               <span className='value'>{movie.Genre.Name}</span>
@@ -51,13 +51,13 @@ export class MovieView extends React.Component {
               <span className='label'>IMDb Rating: </span>
               <span className='value'>{movie.Genre.Name}</span>
             </div>
-          </div>
+          </Row>
           <div className='movieView-description'>
-            <span className='label'>Description: </span>
-            <span className='value'>{movie.Description}</span>
+            <div className='label'>Description:</div>
+            <div className='value'>{movie.Description}</div>
           </div>
         </div>
-      </div>
+      </Container>
     );
   }
 }
