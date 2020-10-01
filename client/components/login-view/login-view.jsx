@@ -13,10 +13,10 @@ export function LoginView(props) {
   };
 
   return (
-    <Form>
-      <h1>Login</h1>
+    <Form className='login-form'>
+      <h1 className='login-pageTitle'>Login</h1>
       <Form.Group controlId='formUsername'>
-        <Form.Label>Username</Form.Label>
+        <Form.Label className='login-label'>Username</Form.Label>
         <Form.Control
           type='text'
           placeholder='Enter username'
@@ -27,7 +27,7 @@ export function LoginView(props) {
         />
       </Form.Group>
       <Form.Group controlId='formBasicPassword'>
-        <Form.Label>Password</Form.Label>
+        <Form.Label className='login-label'>Password</Form.Label>
         <Form.Control
           type='password'
           placeholder='Password'

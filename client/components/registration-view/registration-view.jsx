@@ -23,9 +23,9 @@ export function RegistrationView(props) {
   };
   return (
     <Form>
-      <h1>Register</h1>
+      <h1 className='regstr-pageTitle'>Register</h1>
       <Form.Group controlId='formUsername'>
-        <Form.Label>Username</Form.Label>
+        <Form.Label className='regstr-label'>Username</Form.Label>
         <Form.Control
           onChange={(e) => {
             setUsername(e.target.value);
@@ -35,7 +35,7 @@ export function RegistrationView(props) {
         />
       </Form.Group>
       <Form.Group controlId='formBasicPassword'>
-        <Form.Label>Password</Form.Label>
+        <Form.Label className='regstr-label'>Password</Form.Label>
         <Form.Control
           onChange={(e) => {
             setPassword(e.target.value);
@@ -45,7 +45,7 @@ export function RegistrationView(props) {
         />
       </Form.Group>
       <Form.Group controlId='formBasicEmail'>
-        <Form.Label>Email Address</Form.Label>
+        <Form.Label className='regstr-label'>Email Address</Form.Label>
         <Form.Control
           onChange={(e) => {
             setEmail(e.target.value);
@@ -55,7 +55,7 @@ export function RegistrationView(props) {
         />
       </Form.Group>
       <Form.Group controlId='formBirthday'>
-        <Form.Label>Birthday</Form.Label>
+        <Form.Label className='regstr-label'>Birthday</Form.Label>
         <Form.Control
           onChange={(e) => {
             setBirthday(e.target.value);
