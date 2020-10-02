@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './login-view.scss';
@@ -8,8 +9,18 @@ export function LoginView(props) {
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
+    axios
+      .post('https://moviehunt-gc.herokuapp.com/login', {
+        Username: username,
+        Password: password,
+      })
+      .then((res) => {
+        const data = res.data;
+        props.onLoggedIn(data);
+      })
+      .catch((e) => {
+        console.log('No such user');
+      });
   };
 
   return (

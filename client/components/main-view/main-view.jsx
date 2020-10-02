@@ -7,6 +7,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { Container, Row, Col, Nav } from 'react-bootstrap';
 
 import './main-view.scss';
+import auth from '../../../auth';
 
 export class MainView extends React.Component {
   constructor() {
@@ -14,23 +15,20 @@ export class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
-      user: 1,
+      user: null,
       loginPage: false,
     };
     this.toLoginView = this.toLoginView.bind(this);
   }
 
   componentDidMount() {
-    axios
-      .get('https://moviehunt-gc.herokuapp.com/movies')
-      .then((response) => {
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user'),
       });
+      this.getMovies(accessToken);
+    }
   }
 
   onMovieClick(movie) {
@@ -39,8 +37,25 @@ export class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(user) {
-    this.setState({ user });
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({ user: authData.user.Username });
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  }
+
+  getMovies(token) {
+    axios
+      .get('https://moviehunt-gc.herokuapp.com/movies', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        this.setState({ movies: res.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   toLoginView() {
