@@ -49386,8 +49386,25 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function DirectorView(params) {
-  return _react.default.createElement("div", null, params);
+function DirectorView(director) {
+  console.log(director);
+  return _react.default.createElement("div", null, "1111");
+}
+},{"react":"../node_modules/react/index.js"}],"../components/genre-view/genre-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GenreView = GenreView;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function GenreView(movie) {
+  console.log(movie);
+  return _react.default.createElement("div", null);
 }
 },{"react":"../node_modules/react/index.js"}],"../components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -49543,6 +49560,8 @@ var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
 
 var _directorView = require("../director-view/director-view");
+
+var _genreView = require("../genre-view/genre-view");
 
 var _registrationView = require("../registration-view/registration-view");
 
@@ -49732,8 +49751,19 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render(_ref2) {
           var match = _ref2.match;
           return _react.default.createElement(_directorView.DirectorView, {
-            name: movies.find(function (n) {
-              return movies.Director.Name == match.params.Name;
+            director: movies.find(function (m) {
+              return m.Director.Name === match.params.Name;
+            }).Director
+          });
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/genres/:Name",
+        render: function render(_ref3) {
+          var match = _ref3.match;
+          return _react.default.createElement(_genreView.GenreView, {
+            movie: movies.find(function (m) {
+              return m.Genre.Name === match.params.Name;
             })
           });
         }
@@ -49745,7 +49775,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../movie-card/movie-card":"../components/movie-card/movie-card.jsx","../movie-view/movie-view":"../components/movie-view/movie-view.jsx","../login-view/login-view":"../components/login-view/login-view.jsx","../director-view/director-view":"../components/director-view/director-view.jsx","../registration-view/registration-view":"../components/registration-view/registration-view.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./main-view.scss":"../components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../movie-card/movie-card":"../components/movie-card/movie-card.jsx","../movie-view/movie-view":"../components/movie-view/movie-view.jsx","../login-view/login-view":"../components/login-view/login-view.jsx","../director-view/director-view":"../components/director-view/director-view.jsx","../genre-view/genre-view":"../components/genre-view/genre-view.jsx","../registration-view/registration-view":"../components/registration-view/registration-view.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./main-view.scss":"../components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -49837,7 +49867,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61633" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63549" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

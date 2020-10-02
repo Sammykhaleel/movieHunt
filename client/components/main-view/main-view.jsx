@@ -4,6 +4,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { Container, Row, Col, Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -141,9 +142,19 @@ export class MainView extends React.Component {
             path='/directors/:Name'
             render={({ match }) => (
               <DirectorView
-                name={movies.find(
-                  (n) => movies.Director.Name == match.params.Name
-                )}
+                director={
+                  movies.find((m) => m.Director.Name === match.params.Name)
+                    .Director
+                }
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/genres/:Name'
+            render={({ match }) => (
+              <GenreView
+                movie={movies.find((m) => m.Genre.Name === match.params.Name)}
               />
             )}
           />
