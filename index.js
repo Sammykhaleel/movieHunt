@@ -105,7 +105,7 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 // Get movie genres by genre name
-app.get('/movies/genres/:Name', function (req, res) {
+app.get('/genres/:Name', function (req, res) {
   Movies.findOne({ 'Genre.Name': req.params.Name })
     .then(function (movies) {
       res.json(movies.Genre);
