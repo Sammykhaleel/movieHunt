@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -9,15 +10,17 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     if (!movie) return null;
 
     return (
       <Container className='movieView'>
-        <Button onClick={() => onClick()} variant='dark' className='backBtn'>
-          <i className='fas fa-arrow-left'></i> Back
-        </Button>
+        <Link to={'/'}>
+          <Button variant='dark' className='backBtn'>
+            <i className='fas fa-arrow-left'></i> Back
+          </Button>
+        </Link>
         <div className='movieView-img'>
           <img
             width='500px'

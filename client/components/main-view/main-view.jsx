@@ -3,18 +3,18 @@ import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
+import { DirectorView } from '../director-view/director-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { Container, Row, Col, Nav } from 'react-bootstrap';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './main-view.scss';
-import auth from '../../../auth';
 
 export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
       movies: null,
-      selectedMovie: null,
       user: null,
       loginPage: false,
     };
@@ -29,12 +29,6 @@ export class MainView extends React.Component {
       });
       this.getMovies(accessToken);
     }
-  }
-
-  onMovieClick(movie) {
-    this.setState({
-      selectedMovie: movie,
-    });
   }
 
   onLoggedIn(authData) {
@@ -58,12 +52,17 @@ export class MainView extends React.Component {
       });
   }
 
+  logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
   toLoginView() {
     this.setState({ loginPage: true });
   }
 
   render() {
-    const { movies, selectedMovie, user, loginPage } = this.state;
+    const { movies, user, loginPage } = this.state;
     if (loginPage && !user)
       return (
         <div className='main-view'>
@@ -87,49 +86,69 @@ export class MainView extends React.Component {
     if (!movies) return <div className='main-view' />;
 
     return (
-      <div className='main-view'>
-        <h1 className='main-title'>Movie Hunt</h1>
-        <Nav className='justify-content-center main-nav' activeKey='/home'>
-          <Nav.Item>
-            <Nav.Link href='/home'>Movies</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/home'>My Favorites</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/home'>My Account</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/home'>Sign Out</Nav.Link>
-          </Nav.Item>
-        </Nav>
-        {selectedMovie ? (
-          <MovieView
-            movie={selectedMovie}
-            onClick={() => this.setState({ selectedMovie: null })}
-          />
-        ) : (
+      <Router>
+        <div className='main-view'>
+          <h1 className='main-title'>Movie Hunt</h1>
+          <Nav className='justify-content-center main-nav' activeKey='/home'>
+            <Nav.Item>
+              <Nav.Link href='/home'>Movies</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/home'>My Favorites</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/home'>My Account</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link onClick={this.logOut} href='/home'>
+                Sign Out
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
           <Container>
             <Row>
-              {movies.map((movie, index) => (
-                <Col
-                  key={index}
-                  className='main-card'
-                  lg='3'
-                  md='4'
-                  sm='6'
-                  xs='10'>
-                  <MovieCard
-                    key={movie._id}
-                    movie={movie}
-                    onClick={(movie) => this.onMovieClick(movie)}
-                  />
-                </Col>
-              ))}
+              <Route
+                exact
+                path='/'
+                render={() =>
+                  movies.map((m, index) => (
+                    <Col
+                      key={index}
+                      className='main-card'
+                      lg='3'
+                      md='4'
+                      sm='6'
+                      xs='10'>
+                      {' '}
+                      <MovieCard key={m._id} movie={m} />
+                    </Col>
+                  ))
+                }
+              />
             </Row>
           </Container>
-        )}
-      </div>
+          <Route
+            exact
+            path='/movies/:Title'
+            render={({ match }) => (
+              <MovieView
+                movie={movies.find((m) => m.Title === match.params.Title)}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/directors/:Name'
+            render={({ match }) => (
+              <DirectorView
+                name={movies.find(
+                  (n) => movies.Director.Name == match.params.Name
+                )}
+              />
+            )}
+          />
+        </div>
+      </Router>
     );
   }
 }
