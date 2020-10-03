@@ -117,8 +117,8 @@ app.get('/genres/:Name', function (req, res) {
 });
 
 // Get directors by name
-app.get('/directors/:DirectorId', function (req, res) {
-  Movies.findOne({ 'Director._id': req.params.DirectorId })
+app.get('/directors/:Name', function (req, res) {
+  Movies.findOne({ 'Director.Name': req.params.Name })
     .then(function (movies) {
       res.json(movies);
     })
