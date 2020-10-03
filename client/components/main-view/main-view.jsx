@@ -15,7 +15,7 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: null,
+      movies: [],
       user: null,
       loginPage: false,
     };
@@ -64,44 +64,24 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, user, loginPage } = this.state;
-    if (loginPage && !user)
-      return (
-        <div className='main-view'>
-          <LoginView
-            onClickRegister={() => this.setState({ loginPage: false })}
-            onLoggedIn={(user) => this.onLoggedIn(user)}
-          />
-        </div>
-      );
-
-    if (!user)
-      return (
-        <div className='main-view'>
-          <RegistrationView
-            onLoggedIn={(user) => this.onLoggedIn(user)}
-            onClickLogin={this.toLoginView}
-          />
-        </div>
-      );
-
     if (!movies) return <div className='main-view' />;
 
     return (
       <Router>
         <div className='main-view'>
           <h1 className='main-title'>Movie Hunt</h1>
-          <Nav className='justify-content-center main-nav' activeKey='/home'>
+          <Nav className='justify-content-center main-nav' activeKey='/'>
             <Nav.Item>
-              <Nav.Link href='/home'>Movies</Nav.Link>
+              <Nav.Link href='/'>Movies</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href='/home'>My Favorites</Nav.Link>
+              <Nav.Link href='/'>My Favorites</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href='/home'>My Account</Nav.Link>
+              <Nav.Link href='/'>My Account</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link onClick={this.logOut} href='/home'>
+              <Nav.Link onClick={this.logOut} href='/'>
                 Sign Out
               </Nav.Link>
             </Nav.Item>
@@ -111,8 +91,24 @@ export class MainView extends React.Component {
               <Route
                 exact
                 path='/'
-                render={() =>
-                  movies.map((m, index) => (
+                render={() => {
+                  if (loginPage && !user)
+                    return (
+                      <LoginView
+                        onClickRegister={() =>
+                          this.setState({ loginPage: false })
+                        }
+                        onLoggedIn={(user) => this.onLoggedIn(user)}
+                      />
+                    );
+                  if (!user)
+                    return (
+                      <RegistrationView
+                        onLoggedIn={(user) => this.onLoggedIn(user)}
+                        onClickLogin={this.toLoginView}
+                      />
+                    );
+                  return movies.map((m, index) => (
                     <Col
                       key={index}
                       className='main-card'
@@ -123,8 +119,8 @@ export class MainView extends React.Component {
                       {' '}
                       <MovieCard key={m._id} movie={m} />
                     </Col>
-                  ))
-                }
+                  ));
+                }}
               />
             </Row>
           </Container>
@@ -146,6 +142,7 @@ export class MainView extends React.Component {
                   movies.find((m) => m.Director.Name === match.params.Name)
                     .Director
                 }
+                movies={movies}
               />
             )}
           />
@@ -154,7 +151,9 @@ export class MainView extends React.Component {
             path='/genres/:Name'
             render={({ match }) => (
               <GenreView
-                movie={movies.find((m) => m.Genre.Name === match.params.Name)}
+                genre={
+                  movies.find((m) => m.Genre.Name === match.params.Name).Genre
+                }
               />
             )}
           />

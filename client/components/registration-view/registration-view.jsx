@@ -1,25 +1,39 @@
+import Axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './registration-view.scss';
 
 export function RegistrationView(props) {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const [birthday, setBirthday] = useState();
+  const [Username, setUsername] = useState();
+  const [Password, setPassword] = useState();
+  const [Email, setEmail] = useState();
+  const [Birthday, setBirthday] = useState();
 
   let user = {
-    username,
-    password,
-    email,
-    birthday,
+    Username,
+    Password,
+    Email,
+    Birthday,
   };
   console.log(user);
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
+    Axios.post('https://moviehunt-gc.herokuapp.com/users', {
+      Username,
+      Password,
+      Email,
+      Birthday,
+    })
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        window.open('/', '_self');
+      })
+      .catch((e) => {
+        console.log('Error registering user');
+      });
+    props.onLoggedIn(Username);
   };
   return (
     <div className='regstr-div'>

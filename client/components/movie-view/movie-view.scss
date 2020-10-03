@@ -32,7 +32,9 @@
   font-family: 'Lato', sans-serif;
 }
 
-.movieView-details > * {
+.movieView-details > *,
+.movieView-directorBtn,
+.movieView-genreBtn {
   padding: 8px 5px 8px 5px;
   margin: 0 5px 5px 0;
   padding: fit-content;
@@ -41,6 +43,13 @@
   background-color: #161616;
   border: 1px solid #343a40;
   text-align: center;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.movieView-directorBtn:hover,
+.movieView-genreBtn:hover {
+  text-decoration: none;
 }
 
 .movieView-description {
