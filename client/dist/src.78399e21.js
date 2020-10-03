@@ -49255,7 +49255,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, "Genre: "), _react.default.createElement("span", {
         className: "value"
       }, movie.Genre.Name))), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/directors/".concat(movie.Director.Name),
+        to: "/directors/".concat(movie.Director.id),
         className: "btn-dark movieView-directorBtn"
       }, _react.default.createElement("div", {
         className: "movieView-director"
@@ -49442,16 +49442,15 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(DirectorView);
 
-  function DirectorView(director, movies) {
+  function DirectorView(props) {
     var _this;
 
     _classCallCheck(this, DirectorView);
 
     _this = _super.call(this);
-    console.log(director, movies);
     _this.state = {
-      movies: movies,
-      director: director,
+      movies: props.movies,
+      director: props.director,
       directorInfo: null,
       directorMovies: []
     };
@@ -49463,12 +49462,12 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios.default.get("https://moviehunt-gc.herokuapp.com/directors/".concat(this.state.director.director.id)).then(function (res) {
+      _axios.default.get("https://moviehunt-gc.herokuapp.com/directors/".concat(this.state.director.id)).then(function (res) {
         _this2.setState({
           directorInfo: res.data
         });
 
-        console.log(_this2.state.director.director.Name);
+        console.log(_this2.state.director.Name);
         console.log(res.data);
         console.log(_this2.state.directorInfo);
       });
@@ -49879,12 +49878,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/directors/:Name",
+        path: "/directors/:DirectorId",
         render: function render(_ref2) {
           var match = _ref2.match;
           return _react.default.createElement(_directorView.DirectorView, {
             director: movies.find(function (m) {
-              return m.Director.Name === match.params.Name;
+              return m.Director._id === match.params.DirectorId;
             }).Director,
             movies: movies
           });
@@ -50000,7 +49999,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65445" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53861" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

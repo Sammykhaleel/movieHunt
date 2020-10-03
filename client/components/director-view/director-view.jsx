@@ -3,12 +3,11 @@ import { Container, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 
 export class DirectorView extends React.Component {
-  constructor(director, movies) {
+  constructor(props) {
     super();
-    console.log(director, movies);
     this.state = {
-      movies,
-      director,
+      movies: props.movies,
+      director: props.director,
       directorInfo: null,
       directorMovies: [],
     };
@@ -17,11 +16,11 @@ export class DirectorView extends React.Component {
   componentDidMount() {
     axios
       .get(
-        `https://moviehunt-gc.herokuapp.com/directors/${this.state.director.director.id}`
+        `https://moviehunt-gc.herokuapp.com/directors/${this.state.director.id}`
       )
       .then((res) => {
         this.setState({ directorInfo: res.data });
-        console.log(this.state.director.director.Name);
+        console.log(this.state.director.Name);
         console.log(res.data);
         console.log(this.state.directorInfo);
       });

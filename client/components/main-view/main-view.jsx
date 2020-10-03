@@ -135,11 +135,11 @@ export class MainView extends React.Component {
           />
           <Route
             exact
-            path='/directors/:Name'
+            path='/directors/:DirectorId'
             render={({ match }) => (
               <DirectorView
                 director={
-                  movies.find((m) => m.Director.Name === match.params.Name)
+                  movies.find((m) => m.Director._id === match.params.DirectorId)
                     .Director
                 }
                 movies={movies}
