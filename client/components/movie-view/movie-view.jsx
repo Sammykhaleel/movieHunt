@@ -13,9 +13,13 @@ export class MovieView extends React.Component {
   addToFavorite(movie) {
     console.log(movie);
     axios
-      .put(`/users/${localStorage.getItem('user')}/favorite/add/${movie._id}`)
+      .put(
+        `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
+          'user'
+        )}/favorite/add/${movie._id}`
+      )
       .then(() => {
-        alert(movie.Title, ' has been added to your favorite list');
+        alert(movie.Title + ' has been added to your favorite list');
       });
   }
 

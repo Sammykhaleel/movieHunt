@@ -49203,8 +49203,8 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function addToFavorite(movie) {
       console.log(movie);
 
-      _axios.default.put("/users/".concat(localStorage.getItem('user'), "/favorite/add/").concat(movie._id)).then(function () {
-        alert(movie.Title, ' has been added to your favorite list');
+      _axios.default.put("https://moviehunt-gc.herokuapp.com/users/".concat(localStorage.getItem('user'), "/favorite/add/").concat(movie._id)).then(function () {
+        alert(movie.Title + ' has been added to your favorite list');
       });
     }
   }, {
@@ -50393,7 +50393,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49981" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50878" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
