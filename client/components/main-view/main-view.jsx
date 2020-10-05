@@ -8,6 +8,7 @@ import { GenreView } from '../genre-view/genre-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { Container, Row, Col, Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ProfileView } from '../profile-view/profile-view';
 
 import './main-view.scss';
 
@@ -33,7 +34,6 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
     this.setState({ user: authData.user.Username });
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
@@ -64,8 +64,7 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, user, loginPage } = this.state;
-    if (!movies) return <div className='main-view' />;
-
+    if (movies.length === 0) return <div className='main-view' />;
     return (
       <Router>
         <div className='main-view'>
@@ -75,10 +74,7 @@ export class MainView extends React.Component {
               <Nav.Link href='/'>Movies</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href='/'>My Favorites</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href='/'>My Account</Nav.Link>
+              <Nav.Link href={`/users/${user}`}>My Account</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link onClick={this.logOut} href='/'>
@@ -116,7 +112,6 @@ export class MainView extends React.Component {
                       md='4'
                       sm='6'
                       xs='10'>
-                      {' '}
                       <MovieCard key={m._id} movie={m} />
                     </Col>
                   ));
@@ -135,11 +130,11 @@ export class MainView extends React.Component {
           />
           <Route
             exact
-            path='/directors/:DirectorId'
+            path='/directors/:Name'
             render={({ match }) => (
               <DirectorView
                 director={
-                  movies.find((m) => m.Director._id === match.params.DirectorId)
+                  movies.find((m) => m.Director.Name === match.params.Name)
                     .Director
                 }
                 movies={movies}
@@ -154,8 +149,16 @@ export class MainView extends React.Component {
                 genre={
                   movies.find((m) => m.Genre.Name === match.params.Name).Genre
                 }
+                movies={movies}
               />
             )}
+          />
+          <Route
+            exact
+            path='/users/:Username'
+            render={() => {
+              return <ProfileView user={localStorage.getItem('user')} />;
+            }}
           />
         </div>
       </Router>

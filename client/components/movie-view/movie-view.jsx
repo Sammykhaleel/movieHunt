@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  Button,
-  Container,
-  Row,
-  Popover,
-  OverlayTrigger,
-} from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -15,27 +10,21 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
+  addToFavorite(movie) {
+    console.log(movie);
+    axios
+      .put(`/users/${localStorage.getItem('user')}/favorite/add/${movie._id}`)
+      .then(() => {
+        alert(movie.Title, ' has been added to your favorite list');
+      });
+  }
+
   render() {
     const { movie } = this.props;
     if (!movie) return null;
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
 
-    const directorInfo = (
-      <Popover id='popover-basic'>
-        <Popover.Title as='h3'>Popover right</Popover.Title>
-        <Popover.Content>
-          And here's some <strong>amazing</strong> content. It's very engaging.
-          right?
-        </Popover.Content>
-      </Popover>
-    );
-
-    const director = () => (
-      <OverlayTrigger trigger='click' placement='right' overlay={popover}>
-        <Button variant='success'>Click me to see</Button>
-      </OverlayTrigger>
-    );
     return (
       <Container className='movieView'>
         <Link to={'/'}>
@@ -43,6 +32,12 @@ export class MovieView extends React.Component {
             <i className='fas fa-arrow-left'></i> Back
           </Button>
         </Link>
+        <Button
+          variant='dark'
+          className='favoriteBtn'
+          onClick={() => this.addToFavorite(movie)}>
+          Add to Favorite
+        </Button>
         <div className='movieView-img'>
           <img
             width='500px'
@@ -65,7 +60,7 @@ export class MovieView extends React.Component {
               </div>
             </Link>
             <Link
-              to={`/directors/${movie.Director.id}`}
+              to={`/directors/${movie.Director.Name}`}
               className='btn-dark movieView-directorBtn'>
               <div className='movieView-director'>
                 <span className='label'>Director: </span>

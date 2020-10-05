@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Button, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
+import './director-view.scss';
+import { MovieCard } from '../movie-card/movie-card';
 
 export class DirectorView extends React.Component {
   constructor(props) {
@@ -11,23 +12,22 @@ export class DirectorView extends React.Component {
       directorInfo: null,
       directorMovies: [],
     };
+    console.log(props);
   }
 
   componentDidMount() {
-    axios
-      .get(
-        `https://moviehunt-gc.herokuapp.com/directors/${this.state.director.id}`
-      )
-      .then((res) => {
-        this.setState({ directorInfo: res.data });
-        console.log(this.state.director.Name);
-        console.log(res.data);
-        console.log(this.state.directorInfo);
-      });
+    console.log(this.state.movies);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    const directorMovies = this.state.movies.filter((m) => {
+      return m.Director.Name === this.state.director.Name;
+    });
+    this.setState({ directorMovies });
   }
 
   render() {
-    const { directorInfo, directorMovies } = this.state;
+    const { director, directorInfo, directorMovies } = this.state;
+    if (!director) return <div className='main-view' />;
     return (
       <Container className='directorView'>
         <Button
@@ -38,8 +38,35 @@ export class DirectorView extends React.Component {
         </Button>
         <Row>
           <Col>
-            <h1>2222222222222222</h1>
+            <h1 className='directorView-dirName'>{director.Name}</h1>
           </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className='directorView-dirBirth'>Birth: {director.Birth}</div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className='directorView-dirDeath'>
+              Death: {director.Death ? director.Death : 'N/A'}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className='directorView-dirBio'>{director.Bio}</div>
+          </Col>
+        </Row>
+        <div className='directorView-more'>{director.Name}'s movies:</div>
+        <Row>
+          {directorMovies.map((m, index) => {
+            return (
+              <Col lg='6' sm='5' key={index}>
+                <MovieCard movie={m} key={m._id} />
+              </Col>
+            );
+          })}
         </Row>
       </Container>
     );

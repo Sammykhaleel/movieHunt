@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './registration-view.scss';
@@ -19,12 +19,13 @@ export function RegistrationView(props) {
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    Axios.post('https://moviehunt-gc.herokuapp.com/users', {
-      Username,
-      Password,
-      Email,
-      Birthday,
-    })
+    axios
+      .post('https://moviehunt-gc.herokuapp.com/users', {
+        Username,
+        Password,
+        Email,
+        Birthday,
+      })
       .then((res) => {
         const data = res.data;
         console.log(data);

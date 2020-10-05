@@ -156,6 +156,60 @@
   width: 50%;
   height: 50%;
 }
+.directorView-dirName {
+  color: White;
+  padding-top: 50px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.directorView-dirBirth {
+  color: White;
+  padding-top: 10px;
+  font-family: "Lato", sans-serif;
+}
+
+.directorView-dirDeath {
+  color: White;
+  font-family: "Lato", sans-serif;
+}
+
+.directorView-dirBio {
+  color: White;
+  text-align: center;
+  padding: 50px 0 50px 0;
+  font-family: "Lato", sans-serif;
+}
+
+.directorView-more {
+  color: White;
+  font-size: 30px;
+  text-align: center;
+  padding-bottom: 10px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+.genreView-genreName {
+  color: White;
+  padding-top: 50px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.genreView-description {
+  color: White;
+  padding: 50px 0 50px 0;
+  font-family: "Lato", sans-serif;
+}
+
+.genreView-more {
+  color: White;
+  font-size: 30px;
+  text-align: center;
+  padding-bottom: 10px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
 .regstr-submitBtn,
 .regstr-loginBtn {
   margin: 5px;
