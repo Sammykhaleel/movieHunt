@@ -1,6 +1,7 @@
 .card {
   box-shadow: 4px 4px 5px 0px black;
   border: none;
+  height: 100%;
 }
 
 .card-img-top {
@@ -27,8 +28,9 @@
   font-family: 'Lato', sans-serif;
   font-weight: 300;
 }
+
 .movieCard-button {
-  margin-top: 15px;
+  margin-top: 7%;
 }
 .movieCard-title {
   color: white;

@@ -8,29 +8,26 @@ export class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
     return (
-      <Card>
-        <Card.Img
-          className='movieCard-img'
-          variant='top'
-          src={movie.ImageURL}
-        />
-        <Card.Body className='movieCard-cardBody'>
-          <Card.Title className='movieCard-title'>{movie.Title}</Card.Title>
-          <Card.Text className='detailInfo'>{movie.Genre.Name}</Card.Text>
-          <Card.Text className='detailInfo'>{movie.RunTime}</Card.Text>
-          <Card.Text className='detailInfo'>
-            10 out of {movie.IMDbRating}
-          </Card.Text>
-          <Card.Text className='movieCard-description'>
-            {movie.Description.slice(0, 100)}...
-          </Card.Text>
-          <Link to={`/movies/${movie.Title}`}>
-            <Button className='movieCard-button' variant='dark'>
-              Details
-            </Button>
-          </Link>
-        </Card.Body>
-      </Card>
+      <Link to={`/movies/${movie.Title}`}>
+        <Card>
+          <Card.Img
+            className='movieCard-img'
+            variant='top'
+            src={movie.ImageURL}
+          />
+          <Card.Body className='movieCard-cardBody'>
+            <Card.Title className='movieCard-title'>{movie.Title}</Card.Title>
+            <Card.Text className='detailInfo'>{movie.Genre.Name}</Card.Text>
+            <Card.Text className='detailInfo'>{movie.RunTime}</Card.Text>
+            <Card.Text className='detailInfo'>
+              {movie.IMDbRating} out of 10
+            </Card.Text>
+            <Card.Text className='movieCard-description'>
+              {movie.Description.slice(0, 100)}...
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Link>
     );
   }
 }

@@ -1,15 +1,9 @@
-.movieView-img {
-  display: flex;
-  justify-content: center;
-}
-
-.movieView-img > img {
-  height: 600px;
-  width: auto;
+.movieView-poster {
   border-radius: 0.25rem;
   box-shadow: 9px 7px 12px 3px black;
   background-color: #161616;
   border: 1px solid #343a40;
+  width: 500px;
 }
 
 .movieView-title {
@@ -80,4 +74,9 @@
 .btn-dark {
   box-shadow: 4px 4px 5px 0px black;
   background-color: #161616;
+}
+
+#favoriteBtn {
+  display: flex;
+  justify-content: space-between;
 }

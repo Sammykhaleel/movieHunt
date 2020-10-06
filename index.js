@@ -136,7 +136,6 @@ app.post(
       min: 4,
     }),
     check('Username', 'Username is required').not().isEmpty(),
-    check('Username', 'Username has to be in all lowercases').isLowercase(),
     check(
       'Username',
       'Username contains non alphanumeric characters - not allowed.'

@@ -19,38 +19,60 @@ export class MainView extends React.Component {
       movies: [],
       user: null,
       loginPage: false,
+      userInfo: null,
     };
     this.toLoginView = this.toLoginView.bind(this);
   }
-
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
         user: localStorage.getItem('user'),
       });
-      this.getMovies(accessToken);
+      this.getInfo(accessToken);
     }
   }
 
-  onLoggedIn(authData) {
-    this.setState({ user: authData.user.Username });
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token);
-  }
-
-  getMovies(token) {
+  getInfo(token) {
+    // Get movies
     axios
       .get('https://moviehunt-gc.herokuapp.com/movies', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
+        // Get user info
+        axios
+          .get(
+            `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
+              'user'
+            )}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            }
+          )
+          .then((res) => {
+            this.setState({
+              userInfo: res.data,
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         this.setState({ movies: res.data });
       })
       .catch(function (error) {
         console.log(error);
       });
+  }
+
+  onLoggedIn(authData) {
+    console.log('authdata', authData);
+    this.setState({ user: authData.user.Username });
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getInfo(localStorage.getItem('token'));
   }
 
   logOut() {
@@ -63,8 +85,9 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, loginPage } = this.state;
-    if (movies.length === 0) return <div className='main-view' />;
+    const { movies, user, loginPage, userInfo } = this.state;
+
+    // if (movies.length === 0) return <div className='main-view' />;
     return (
       <Router>
         <div className='main-view'>
@@ -83,7 +106,7 @@ export class MainView extends React.Component {
             </Nav.Item>
           </Nav>
           <Container>
-            <Row>
+            <Row className='main-cardContainer'>
               <Route
                 exact
                 path='/'
@@ -157,7 +180,14 @@ export class MainView extends React.Component {
             exact
             path='/users/:Username'
             render={() => {
-              return <ProfileView user={localStorage.getItem('user')} />;
+              if (userInfo)
+                return (
+                  <ProfileView
+                    user={localStorage.getItem('user')}
+                    movie={movies}
+                    userInfo={userInfo}
+                  />
+                );
             }}
           />
         </div>

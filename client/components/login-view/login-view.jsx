@@ -9,6 +9,18 @@ export function LoginView(props) {
 
   const handlesubmit = (e) => {
     e.preventDefault();
+    if (!username) {
+      alert('Username is required');
+    }
+    if (username) {
+      if (username.length < 4) {
+        alert('Username has to be longer than 4 characters');
+      }
+    }
+    if (!password) {
+      alert('Password is required');
+    }
+    console.log(username, password);
     axios
       .post('https://moviehunt-gc.herokuapp.com/login', {
         Username: username,
@@ -19,7 +31,7 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch((e) => {
-        console.log('No such user');
+        console.log('No such user', e);
       });
   };
 

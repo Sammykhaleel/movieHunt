@@ -8,77 +8,85 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      userInfo: null,
-      movies: [],
-      favoriteMovies: [],
+      movies: props.movie,
       username: props.user,
-      password: null,
-      email: null,
-      birthday: null,
+      password: props.userInfo.Password,
+      email: props.userInfo.Email,
+      birthday: props.userInfo.Birthday,
+      favoriteMovies: props.userInfo.FavoriteMovies,
+      favMovies: [],
     };
   }
 
   componentDidMount() {
-    axios
-      .get(`https://moviehunt-gc.herokuapp.com/users/${this.state.username}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      })
-      .then((res) => {
-        this.setState({
-          userInfo: res.data,
-          username: res.data.Username,
-          password: res.data.Password,
-          email: res.data.Email,
-          birthday: res.data.Birthday,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+    let fav = [];
+    for (let i = 0; i < this.state.favoriteMovies.length; i++) {
+      var favMovie = this.state.movies.find((m) => {
+        return m._id === this.state.favoriteMovies[i];
       });
+      fav.push(favMovie);
+    }
+    this.setState({ favMovies: fav });
+  }
+
+  deleteFav(movie) {
     axios
-      .get('https://moviehunt-gc.herokuapp.com/movies', {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      })
+      .post(
+        `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
+          'user'
+        )}/favorite/remove/${movie._id}`
+      )
       .then((res) => {
-        this.setState({ movies: res.data });
+        alert(movie.Title + ' has been removed from your favorite list');
+        this.setState({ favoriteMovies: res.data.FavoriteMovies });
+        this.componentDidMount();
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  deleteFav(id) {
-    console.log(id);
+  updateUser(username, password, email, birthday) {
+    axios
+      .put(
+        `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
+          'user'
+        )}`,
+        {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday.slice(0, 10),
+        }
+      )
+      .then(() => {
+        alert(username + ' has been updated');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
-  updateUser(state) {
-    // const { username, password, email, birthday } = this.state;
-    console.log(
-      'update user',
-      state.username,
-      state.password,
-      state.email,
-      state.birthday
-    );
+  deleteUser(username) {
+    axios
+      .delete(
+        `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
+          'user'
+        )}`
+      )
+      .then(() => {
+        alert(username + ' has been deleted');
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        window.location.pathname = '';
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {
-    const { username, userInfo, movies } = this.state;
-    if (userInfo) {
-      const favoriteMovies = this.state.userInfo.FavoriteMovies;
-      for (let i = 0; i < favoriteMovies.length; i++) {
-        var favorites = new Array(
-          this.state.movies.find((m) => {
-            return m._id === favoriteMovies[i];
-          })
-        );
-      }
-    }
-
-    if (!userInfo) return <div className='main-view' />;
-    if (!favorites) return <div className='main-view' />;
-    console.log('user', this.state.password);
-
+    const { username, password, favMovies, email, birthday } = this.state;
     return (
       <Container className='profileView'>
         <Button
@@ -87,7 +95,7 @@ export class ProfileView extends React.Component {
           className='backBtn'>
           <i className='fas fa-arrow-left'></i> Back
         </Button>
-        <Row>
+        <Row className='profileView-container'>
           <Form>
             <Form.Group controlId='formBasicUsername'>
               <Form.Label>Username</Form.Label>
@@ -100,9 +108,6 @@ export class ProfileView extends React.Component {
                   }
                 }}
               />
-              <Form.Text className='text-muted'>
-                We'll never share your email with anyone else.
-              </Form.Text>
             </Form.Group>
             <Form.Group controlId='formBasicPassword'>
               <Form.Label>Password</Form.Label>
@@ -112,25 +117,21 @@ export class ProfileView extends React.Component {
                 onChange={(e) => {
                   this.setState({ password: e.target.value });
                   if (!e.target.value) {
-                    this.setState({ password: userInfo.Password });
+                    this.setState({ password: password });
                   }
                 }}
               />
-            </Form.Group>
-            <Form.Group controlId='formBasicConfirmPassword'>
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control type='password' placeholder='Confirm Password' />
             </Form.Group>
 
             <Form.Group controlId='formBasicEmail'>
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type='email'
-                placeholder={userInfo.Email}
+                placeholder={email}
                 onChange={(e) => {
                   this.setState({ email: e.target.value });
                   if (!e.target.value) {
-                    this.setState({ email: userInfo.Email });
+                    this.setState({ email: email });
                   }
                 }}
               />
@@ -139,37 +140,48 @@ export class ProfileView extends React.Component {
               <Form.Label>Birthday</Form.Label>
               <Form.Control
                 type='date'
-                placeholder={userInfo.Birthday}
+                placeholder={birthday}
                 onChange={(e) => {
                   this.setState({ birthday: e.target.value });
                   if (!e.target.value) {
-                    this.setState({ birthday: userInfo.Birthday });
+                    this.setState({ birthday: birthday });
                   }
                 }}
               />
             </Form.Group>
-            <Button
-              variant='btn-dark'
-              type='submit'
-              onClick={(e) => {
-                e.preventDefault();
-                this.updateUser(this.state);
-              }}>
-              Update
-            </Button>
-            <Button variant='btn-dark' type='submit'>
-              Close account
-            </Button>
+            <Row className='profileView-btnContainer'>
+              <Button
+                className='profileView-updateBtn btn-dark'
+                variant='btn-dark'
+                type='submit'
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.updateUser(username, password, email, birthday);
+                }}>
+                Update
+              </Button>
+              <Button
+                className='profileView-closeBtn btn-dark'
+                variant='btn-dark'
+                type='submit'
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.deleteUser(username);
+                }}>
+                Close account
+              </Button>
+            </Row>
           </Form>
         </Row>
+        <h3>Favorite Movies</h3>
         <Row>
-          {favorites.map((m, index) => {
+          {favMovies.map((m, index) => {
             return (
-              <Col sm='4' key={index}>
+              <Col className='profile-movieCard' sm='4' key={index}>
                 <Button
-                  onClick={() => this.deleteFav(m._id)}
+                  onClick={() => this.deleteFav(m)}
                   variant='dark'
-                  className='backBtn'>
+                  className='profile-deleteBtn'>
                   Delete
                 </Button>
                 <MovieCard movie={m} key={index} />

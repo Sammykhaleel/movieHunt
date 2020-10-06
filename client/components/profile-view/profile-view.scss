@@ -1,0 +1,28 @@
+.profileView {
+  color: white;
+}
+
+.profileView-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
+
+.profileView-updateBtn,
+.profileView-closeBtn {
+  color: white;
+}
+
+.profileView-btnContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-movieCard {
+  margin-top: 5%;
+}
+
+.profile-deleteBtn {
+  width: 100%;
+}

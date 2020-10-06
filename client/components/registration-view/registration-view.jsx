@@ -15,10 +15,20 @@ export function RegistrationView(props) {
     Email,
     Birthday,
   };
-  console.log(user);
 
   const handlesubmit = (e) => {
     e.preventDefault();
+    if (!Username) {
+      alert('Username is required');
+    }
+    if (Username) {
+      if (Username.length < 4) {
+        alert('Username has to be longer than 4 characters');
+      }
+    }
+    if (!Password) {
+      alert('Password is required');
+    }
     axios
       .post('https://moviehunt-gc.herokuapp.com/users', {
         Username,
@@ -27,15 +37,30 @@ export function RegistrationView(props) {
         Birthday,
       })
       .then((res) => {
-        const data = res.data;
-        console.log(data);
-        window.open('/', '_self');
+        console.log('res data', res.data);
+        login(res.data);
       })
       .catch((e) => {
         console.log('Error registering user');
       });
-    props.onLoggedIn(Username);
   };
+
+  const login = (data) => {
+    axios
+      .post('https://moviehunt-gc.herokuapp.com/login', {
+        Username: data.Username,
+        Password: user.Password,
+      })
+      .then((res) => {
+        const data = res.data;
+        props.onLoggedIn(data);
+        window.open('/', '_self');
+      })
+      .catch((e) => {
+        console.log('No such user', e);
+      });
+  };
+
   return (
     <div className='regstr-div'>
       <Form className='regstr-form'>
