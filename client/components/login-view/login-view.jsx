@@ -21,7 +21,6 @@ export function LoginView(props) {
     if (!password) {
       alert('Password is required');
     }
-    console.log(username, password);
     axios
       .post('https://moviehunt-gc.herokuapp.com/login', {
         Username: username,
@@ -29,7 +28,6 @@ export function LoginView(props) {
       })
       .then((res) => {
         const data = res.data;
-        console.log(res.data);
         props.onLoggedIn(data);
       })
       .catch((e) => {

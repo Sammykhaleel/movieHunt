@@ -77,12 +77,54 @@ class MainView extends React.Component {
   render() {
     let { movies, userInfo } = this.props;
     let { user } = this.state;
-    if (movies.length === 0)
+    if (movies.length === 0 || !userInfo.Username) {
+      if (!localStorage.getItem('user')) {
+        return (
+          <Router>
+            <div className='main-view'>
+              <h1 className='main-title'>Movie Hunt</h1>
+              <Nav className='justify-content-center main-nav' activeKey='/'>
+                <Nav.Item>
+                  <Nav.Link href='/'>Movies</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href={`/users/${user}`}>My Account</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link onClick={this.logOut} href='/'>
+                    Sign Out
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </div>
+            <Container>
+              <Route
+                exact
+                path='/'
+                render={() => {
+                  return (
+                    <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                  );
+                }}
+              />
+              <Route
+                path='/register'
+                render={() => (
+                  <RegistrationView
+                    onLoggedIn={(user) => this.onLoggedIn(user)}
+                  />
+                )}
+              />
+            </Container>
+          </Router>
+        );
+      }
       return (
         <div>
           <LoadingView />
         </div>
       );
+    }
 
     return (
       <Router>

@@ -42,7 +42,7 @@ export function RegistrationView(props) {
         login(res.data);
       })
       .catch((e) => {
-        console.log('Error registering user');
+        console.log(e, 'Error registering user');
       });
   };
 

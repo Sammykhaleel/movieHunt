@@ -51730,17 +51730,17 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(ProfileView);
 
-  function ProfileView() {
+  function ProfileView(props) {
     var _this;
 
     _classCallCheck(this, ProfileView);
 
-    _this = _super.call(this);
+    _this = _super.call(this, props);
     _this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null
+      Username: props.userInfo.Username,
+      Password: props.userInfo.Password,
+      Email: props.userInfo.Email,
+      Birthday: props.userInfo.Birthday
     };
     return _this;
   }
@@ -51779,7 +51779,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         alert(username + ' has been deleted');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        window.location.pathname = '';
+        window.location.pathname = '/';
       }).catch(function (error) {
         console.log(error);
       });
@@ -52235,14 +52235,11 @@ function LoginView(props) {
       alert('Password is required');
     }
 
-    console.log(username, password);
-
     _axios.default.post('https://moviehunt-gc.herokuapp.com/login', {
       Username: username,
       Password: password
     }).then(function (res) {
       var data = res.data;
-      console.log(res.data);
       props.onLoggedIn(data);
     }).catch(function (e) {
       console.log('No such user', e);
@@ -52385,7 +52382,7 @@ function RegistrationView(props) {
       console.log('res data', res.data);
       login(res.data);
     }).catch(function (e) {
-      console.log('Error registering user');
+      console.log(e, 'Error registering user');
     });
   };
 
@@ -52857,7 +52854,48 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$props.movies,
           userInfo = _this$props.userInfo;
       var user = this.state.user;
-      if (movies.length === 0) return _react.default.createElement("div", null, _react.default.createElement(_loadingView.LoadingView, null));
+
+      if (movies.length === 0 || !userInfo.Username) {
+        if (!localStorage.getItem('user')) {
+          return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
+            className: "main-view"
+          }, _react.default.createElement("h1", {
+            className: "main-title"
+          }, "Movie Hunt"), _react.default.createElement(_reactBootstrap.Nav, {
+            className: "justify-content-center main-nav",
+            activeKey: "/"
+          }, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+            href: "/"
+          }, "Movies")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+            href: "/users/".concat(user)
+          }, "My Account")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+            onClick: this.logOut,
+            href: "/"
+          }, "Sign Out")))), _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactRouterDom.Route, {
+            exact: true,
+            path: "/",
+            render: function render() {
+              return _react.default.createElement(_loginView.LoginView, {
+                onLoggedIn: function onLoggedIn(user) {
+                  return _this3.onLoggedIn(user);
+                }
+              });
+            }
+          }), _react.default.createElement(_reactRouterDom.Route, {
+            path: "/register",
+            render: function render() {
+              return _react.default.createElement(_registrationView.RegistrationView, {
+                onLoggedIn: function onLoggedIn(user) {
+                  return _this3.onLoggedIn(user);
+                }
+              });
+            }
+          })));
+        }
+
+        return _react.default.createElement("div", null, _react.default.createElement(_loadingView.LoadingView, null));
+      }
+
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
         className: "main-view"
       }, _react.default.createElement("h1", {
@@ -53125,7 +53163,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54621" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60415" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

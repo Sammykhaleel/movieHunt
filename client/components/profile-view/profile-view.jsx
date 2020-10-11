@@ -8,13 +8,13 @@ import { setUser } from '../../src/actions/actions';
 import { LoadingView } from '../loading-view/loading-view';
 
 class ProfileView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
+      Username: props.userInfo.Username,
+      Password: props.userInfo.Password,
+      Email: props.userInfo.Email,
+      Birthday: props.userInfo.Birthday,
     };
   }
 
@@ -66,7 +66,7 @@ class ProfileView extends React.Component {
         alert(username + ' has been deleted');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        window.location.pathname = '';
+        window.location.pathname = '/';
       })
       .catch(function (error) {
         console.log(error);
