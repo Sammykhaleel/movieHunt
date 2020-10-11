@@ -1,32 +1,21 @@
 import React from 'react';
 import { Container, Button, Row, Col, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import './profile-view.scss';
 import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
+import { setUser } from '../../src/actions/actions';
+import { LoadingView } from '../loading-view/loading-view';
 
-export class ProfileView extends React.Component {
-  constructor(props) {
+class ProfileView extends React.Component {
+  constructor() {
     super();
     this.state = {
-      movies: props.movie,
-      username: props.user,
-      password: props.userInfo.Password,
-      email: props.userInfo.Email,
-      birthday: props.userInfo.Birthday,
-      favoriteMovies: props.userInfo.FavoriteMovies,
-      favMovies: [],
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthday: null,
     };
-  }
-
-  componentDidMount() {
-    let fav = [];
-    for (let i = 0; i < this.state.favoriteMovies.length; i++) {
-      var favMovie = this.state.movies.find((m) => {
-        return m._id === this.state.favoriteMovies[i];
-      });
-      fav.push(favMovie);
-    }
-    this.setState({ favMovies: fav });
   }
 
   deleteFav(movie) {
@@ -37,9 +26,8 @@ export class ProfileView extends React.Component {
         )}/favorite/remove/${movie._id}`
       )
       .then((res) => {
+        this.props.setUser(res.data);
         alert(movie.Title + ' has been removed from your favorite list');
-        this.setState({ favoriteMovies: res.data.FavoriteMovies });
-        this.componentDidMount();
       })
       .catch(function (error) {
         console.log(error);
@@ -86,7 +74,30 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { username, password, favMovies, email, birthday } = this.state;
+    let { userInfo, movies } = this.props;
+    const { Username, Password, Birthday, Email } = userInfo;
+
+    if (!Username)
+      return (
+        <div>
+          <LoadingView />
+        </div>
+      );
+
+    var fav = [];
+    for (let i = 0; i < userInfo.FavoriteMovies.length; i++) {
+      var favMovie = movies.find((m) => {
+        return m._id === userInfo.FavoriteMovies[i];
+      });
+      fav.push(favMovie);
+    }
+
+    if (fav === undefined)
+      return (
+        <div>
+          <LoadingView />
+        </div>
+      );
     return (
       <Container className='profileView'>
         <Button
@@ -100,11 +111,11 @@ export class ProfileView extends React.Component {
             <Form.Group controlId='formBasicUsername'>
               <Form.Label>Username</Form.Label>
               <Form.Control
-                placeholder={username}
+                placeholder={Username}
                 onChange={(e) => {
-                  this.setState({ username: e.target.value });
+                  this.setState({ Username: e.target.value });
                   if (!e.target.value) {
-                    this.setState({ username: this.props.user });
+                    this.setState({ Username: Username });
                   }
                 }}
               />
@@ -115,9 +126,9 @@ export class ProfileView extends React.Component {
                 type='password'
                 placeholder='Password'
                 onChange={(e) => {
-                  this.setState({ password: e.target.value });
+                  this.setState({ Password: e.target.value });
                   if (!e.target.value) {
-                    this.setState({ password: password });
+                    this.setState({ Password: Password });
                   }
                 }}
               />
@@ -127,11 +138,11 @@ export class ProfileView extends React.Component {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type='email'
-                placeholder={email}
+                placeholder={Email}
                 onChange={(e) => {
-                  this.setState({ email: e.target.value });
+                  this.setState({ Email: e.target.value });
                   if (!e.target.value) {
-                    this.setState({ email: email });
+                    this.setState({ Email: Email });
                   }
                 }}
               />
@@ -140,11 +151,13 @@ export class ProfileView extends React.Component {
               <Form.Label>Birthday</Form.Label>
               <Form.Control
                 type='date'
-                placeholder={birthday}
+                placeholder={Birthday}
                 onChange={(e) => {
-                  this.setState({ birthday: e.target.value });
+                  console.log(e.target.value);
+                  this.setState({ Birthday: e.target.value });
                   if (!e.target.value) {
-                    this.setState({ birthday: birthday });
+                    console.log(e.target.value);
+                    this.setState({ Birthday: Birthday });
                   }
                 }}
               />
@@ -156,7 +169,12 @@ export class ProfileView extends React.Component {
                 type='submit'
                 onClick={(e) => {
                   e.preventDefault();
-                  this.updateUser(username, password, email, birthday);
+                  this.updateUser(
+                    this.state.Username,
+                    this.state.Password,
+                    this.state.Email,
+                    this.state.Birthday
+                  );
                 }}>
                 Update
               </Button>
@@ -166,7 +184,7 @@ export class ProfileView extends React.Component {
                 type='submit'
                 onClick={(e) => {
                   e.preventDefault();
-                  this.deleteUser(username);
+                  this.deleteUser(Username);
                 }}>
                 Close account
               </Button>
@@ -175,11 +193,11 @@ export class ProfileView extends React.Component {
         </Row>
         <h3>Favorite Movies</h3>
         <Row>
-          {favMovies.map((m, index) => {
+          {fav.map((m, index) => {
             return (
               <Col className='profile-movieCard' sm='4' key={index}>
                 <Button
-                  onClick={() => this.deleteFav(m)}
+                  onClick={() => this.deleteFav(m, index)}
                   variant='dark'
                   className='profile-deleteBtn'>
                   Delete
@@ -193,3 +211,5 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+export default connect(null, { setUser })(ProfileView);

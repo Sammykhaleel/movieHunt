@@ -193,13 +193,11 @@ app.put(
     check('Username', 'Username is required. Min 4 characters').isLength({
       min: 4,
     }),
-    check('Username', 'Username is required').not().isEmpty(),
     check('Username', 'Username has to be in all lowercases').isLowercase(),
     check(
       'Username',
       'Username contains non alphanumeric characters - not allowed.'
     ).isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
     check(
       'Password',
       'Password contains non alphanumeric characters - not allowed.'

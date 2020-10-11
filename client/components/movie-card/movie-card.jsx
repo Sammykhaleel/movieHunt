@@ -7,6 +7,7 @@ import './movie-card.scss';
 export class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
+    if (movie === undefined) return <div></div>;
     return (
       <Link to={`/movies/${movie.Title}`}>
         <Card>

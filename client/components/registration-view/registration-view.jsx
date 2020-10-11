@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './registration-view.scss';
 
 export function RegistrationView(props) {
@@ -113,13 +114,11 @@ export function RegistrationView(props) {
           type='submit'>
           Submit
         </Button>
-        <Button
-          className='regstr-loginBtn'
-          onClick={props.onClickLogin}
-          variant='primary'
-          type='button'>
-          Login
-        </Button>
+        <Link to='/'>
+          <Button className='regstr-loginBtn' variant='primary' type='button'>
+            Login
+          </Button>
+        </Link>
       </Form>
     </div>
   );

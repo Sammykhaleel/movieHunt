@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -28,6 +29,7 @@ export function LoginView(props) {
       })
       .then((res) => {
         const data = res.data;
+        console.log(res.data);
         props.onLoggedIn(data);
       })
       .catch((e) => {
@@ -68,13 +70,11 @@ export function LoginView(props) {
           type='submit'>
           Submit
         </Button>
-        <Button
-          className='login-registerBtn'
-          onClick={props.onClickRegister}
-          variant='primary'
-          type='button'>
-          Register
-        </Button>
+        <Link to='/register'>
+          <Button className='login-registerBtn' variant='primary' type='button'>
+            Register
+          </Button>
+        </Link>
       </Form>
     </div>
   );
