@@ -160,8 +160,9 @@ app.post(
     Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
-          alert('User already exists');
-          return res.status(400).send(req.body.Username);
+          return res
+            .status(400)
+            .send(req.body.Username + 'User already exists');
         } else {
           Users.create({
             Username: req.body.Username,
