@@ -52424,7 +52424,7 @@ function RegistrationView(props) {
     }).then(function (res) {
       var data = res.data;
       props.onLoggedIn(data);
-      window.open('/', '_self');
+      window.open('/client', '_self');
     }).catch(function (e) {
       console.log('No such user', e);
     });
@@ -52935,7 +52935,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       if (movies.length === 0 || !userInfo.Username) {
         if (!localStorage.getItem('user')) {
-          return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
+          return _react.default.createElement(_reactRouterDom.BrowserRouter, {
+            basename: "/client"
+          }, _react.default.createElement("div", {
             className: "main-view"
           }, _react.default.createElement("h1", {
             className: "main-title"
@@ -52945,10 +52947,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           }, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
             href: "/"
           }, "Movies")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
-            href: "/users/".concat(user)
+            href: "/client/users/".concat(user)
           }, "My Account")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
             onClick: this.logOut,
-            href: "/"
+            href: "/client"
           }, "Sign Out")))), _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
             path: "/",
@@ -52974,7 +52976,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         return _react.default.createElement("div", null, _react.default.createElement(_loadingView.LoadingView, null));
       }
 
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, {
+        basename: "/client"
+      }, _react.default.createElement("div", {
         className: "main-view"
       }, _react.default.createElement("h1", {
         className: "main-title"
@@ -52982,12 +52986,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "justify-content-center main-nav",
         activeKey: "/"
       }, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
-        href: "/"
+        href: "/client"
       }, "Movies")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
-        href: "/users/".concat(user)
+        href: "/client/users/".concat(user)
       }, "My Account")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         onClick: this.logOut,
-        href: "/"
+        href: "/client"
       }, "Sign Out"))), _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
@@ -53231,7 +53235,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50362" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53794" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
