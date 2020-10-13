@@ -2,21 +2,19 @@ import React from 'react';
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import './genre-view.scss';
 import { MovieCard } from '../movie-card/movie-card';
+import PropTypes from 'prop-types';
 
 export class GenreView extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       movies: props.movies,
       genre: props.genre,
-      genreInfo: null,
       genreMovies: [],
     };
-    console.log(props);
   }
 
   componentDidMount() {
-    console.log(this.state.movies);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     const genreMovies = this.state.movies.filter((m) => {
@@ -26,7 +24,7 @@ export class GenreView extends React.Component {
   }
 
   render() {
-    const { genre, genreInfo, genreMovies } = this.state;
+    const { genre, genreMovies } = this.state;
     return (
       <Container className='genreView'>
         <Button
@@ -51,7 +49,7 @@ export class GenreView extends React.Component {
         <Row>
           {genreMovies.map((m, index) => {
             return (
-              <Col sm='4' key={index}>
+              <Col className='genreView-movieCard' xs='6' sm='4' key={index}>
                 <MovieCard movie={m} key={index} />
               </Col>
             );
@@ -61,3 +59,8 @@ export class GenreView extends React.Component {
     );
   }
 }
+
+GenreView.propTypes = {
+  genre: PropTypes.object.isRequired,
+  movies: PropTypes.array.isRequired,
+};

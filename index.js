@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 const passport = require('passport');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 const Movies = Models.Moive;
 const Users = Models.Users;
@@ -11,8 +12,13 @@ const { check, validationResult } = require('express-validator');
 
 app.use(bodyParser.json());
 app.use(cors());
-// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+app.use(express.static('public'));
+app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
+app.get('client/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
+// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 // app.use(
 //   cors({
 //     origin: (origin, callback) => {

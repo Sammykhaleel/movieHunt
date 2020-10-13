@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import './registration-view.scss';
 
 export function RegistrationView(props) {
@@ -38,7 +39,6 @@ export function RegistrationView(props) {
         Birthday,
       })
       .then((res) => {
-        console.log('res data', res.data);
         login(res.data);
       })
       .catch((e) => {
@@ -55,37 +55,64 @@ export function RegistrationView(props) {
       .then((res) => {
         const data = res.data;
         props.onLoggedIn(data);
-        window.open('/', '_self');
+        window.open('/client', '_self');
       })
       .catch((e) => {
         console.log('No such user', e);
       });
   };
 
+  const register_username = (props) => (
+    <Tooltip id='button-tooltip' {...props}>
+      Username is required. Min 4 characters. Non alphanumeric characters are
+      not allowed.
+    </Tooltip>
+  );
+  const register_password = (props) => (
+    <Tooltip id='button-tooltip' {...props}>
+      Password is required. Non alphanumeric characters are not allowed.
+    </Tooltip>
+  );
+  const register_birthday = (props) => (
+    <Tooltip id='button-tooltip' {...props}>
+      Use calender icon for your birthday,
+    </Tooltip>
+  );
+
   return (
     <div className='regstr-div'>
       <Form className='regstr-form'>
         <h1 className='regstr-pageTitle'>Register</h1>
-        <Form.Group controlId='formUsername'>
-          <Form.Label className='regstr-label'>Username</Form.Label>
-          <Form.Control
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-            type='text'
-            placeholder='Enter username'
-          />
-        </Form.Group>
-        <Form.Group controlId='formBasicPassword'>
-          <Form.Label className='regstr-label'>Password</Form.Label>
-          <Form.Control
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            type='password'
-            placeholder='Password'
-          />
-        </Form.Group>
+        <OverlayTrigger
+          placement='top'
+          delay={{ show: 50, hide: 100 }}
+          overlay={register_username}>
+          <Form.Group controlId='formUsername'>
+            <Form.Label className='regstr-label'>Username</Form.Label>
+            <Form.Control
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+              type='text'
+              placeholder='Enter username'
+            />
+          </Form.Group>
+        </OverlayTrigger>
+        <OverlayTrigger
+          placement='top'
+          delay={{ show: 50, hide: 100 }}
+          overlay={register_password}>
+          <Form.Group controlId='formBasicPassword'>
+            <Form.Label className='regstr-label'>Password</Form.Label>
+            <Form.Control
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              type='password'
+              placeholder='Password'
+            />
+          </Form.Group>
+        </OverlayTrigger>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label className='regstr-label'>Email Address</Form.Label>
           <Form.Control
@@ -96,17 +123,22 @@ export function RegistrationView(props) {
             placeholder='Enter email'
           />
         </Form.Group>
-        <Form.Group controlId='formBirthday'>
-          <Form.Label className='regstr-label'>Birthday</Form.Label>
-          <Form.Control
-            onChange={(e) => {
-              setBirthday(e.target.value);
-            }}
-            type='date'
-            placeholder='Enter Birthday'
-          />
-          <Form.Text className='text-muted'>YYYY-MM-DD</Form.Text>
-        </Form.Group>
+        <OverlayTrigger
+          placement='top'
+          delay={{ show: 50, hide: 100 }}
+          overlay={register_birthday}>
+          <Form.Group controlId='formBirthday'>
+            <Form.Label className='regstr-label'>Birthday</Form.Label>
+            <Form.Control
+              onChange={(e) => {
+                setBirthday(e.target.value);
+              }}
+              type='date'
+              placeholder='Enter Birthday'
+            />
+            <Form.Text className='text-muted'>YYYY-MM-DD</Form.Text>
+          </Form.Group>
+        </OverlayTrigger>
         <Button
           className='regstr-submitBtn'
           onClick={handlesubmit}
@@ -123,3 +155,7 @@ export function RegistrationView(props) {
     </div>
   );
 }
+
+RegistrationView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
+};

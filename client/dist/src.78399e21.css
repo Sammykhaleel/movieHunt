@@ -252,6 +252,10 @@
   font-family: "Lato", sans-serif;
   font-weight: 600;
 }
+
+.directorView-movieCard {
+  margin-top: 5%;
+}
 .genreView-genreName {
   color: White;
   padding-top: 50px;
@@ -272,6 +276,10 @@
   padding-bottom: 10px;
   font-family: "Lato", sans-serif;
   font-weight: 600;
+}
+
+.genreView-movieCard {
+  margin-top: 5%;
 }
 a,
 a:hover,

@@ -9,11 +9,12 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       favoriteMovies: [],
     };
@@ -156,3 +157,7 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.object,
+};

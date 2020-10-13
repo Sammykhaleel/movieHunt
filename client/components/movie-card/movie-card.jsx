@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './movie-card.scss';
 
@@ -36,7 +36,10 @@ export class MovieCard extends React.Component {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
+    Genre: PropTypes.object.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string,
+    RunTime: PropTypes.string,
+    IMDbRating: PropTypes.string,
   }).isRequired,
 };

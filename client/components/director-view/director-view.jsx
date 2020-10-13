@@ -2,21 +2,19 @@ import React from 'react';
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import './director-view.scss';
 import { MovieCard } from '../movie-card/movie-card';
+import PropTypes from 'prop-types';
 
 export class DirectorView extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       movies: props.movies,
       director: props.director,
-      directorInfo: null,
       directorMovies: [],
     };
-    console.log(props);
   }
 
   componentDidMount() {
-    console.log(this.state.movies);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     const directorMovies = this.state.movies.filter((m) => {
@@ -26,8 +24,7 @@ export class DirectorView extends React.Component {
   }
 
   render() {
-    const { director, directorInfo, directorMovies } = this.state;
-    if (!director) return <div className='main-view' />;
+    const { director, directorMovies } = this.state;
     return (
       <Container className='directorView'>
         <Button
@@ -62,7 +59,7 @@ export class DirectorView extends React.Component {
         <Row>
           {directorMovies.map((m, index) => {
             return (
-              <Col lg='6' sm='5' key={index}>
+              <Col className='directorView-movieCard' xs='6' sm='4' key={index}>
                 <MovieCard movie={m} key={m._id} />
               </Col>
             );
@@ -72,3 +69,8 @@ export class DirectorView extends React.Component {
     );
   }
 }
+
+DirectorView.propTypes = {
+  director: PropTypes.object.isRequired,
+  movies: PropTypes.array.isRequired,
+};

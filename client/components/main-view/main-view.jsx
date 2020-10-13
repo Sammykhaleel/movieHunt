@@ -80,7 +80,7 @@ class MainView extends React.Component {
     if (movies.length === 0 || !userInfo.Username) {
       if (!localStorage.getItem('user')) {
         return (
-          <Router>
+          <Router basename='/client'>
             <div className='main-view'>
               <h1 className='main-title'>Movie Hunt</h1>
               <Nav className='justify-content-center main-nav' activeKey='/'>
@@ -88,10 +88,10 @@ class MainView extends React.Component {
                   <Nav.Link href='/'>Movies</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href={`/users/${user}`}>My Account</Nav.Link>
+                  <Nav.Link href={`/client/users/${user}`}>My Account</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link onClick={this.logOut} href='/'>
+                  <Nav.Link onClick={this.logOut} href='/client'>
                     Sign Out
                   </Nav.Link>
                 </Nav.Item>
@@ -127,18 +127,18 @@ class MainView extends React.Component {
     }
 
     return (
-      <Router>
+      <Router basename='/client'>
         <div className='main-view'>
           <h1 className='main-title'>Movie Hunt</h1>
           <Nav className='justify-content-center main-nav' activeKey='/'>
             <Nav.Item>
-              <Nav.Link href='/'>Movies</Nav.Link>
+              <Nav.Link href='/client'>Movies</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href={`/users/${user}`}>My Account</Nav.Link>
+              <Nav.Link href={`/client/users/${user}`}>My Account</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link onClick={this.logOut} href='/'>
+              <Nav.Link onClick={this.logOut} href='/client'>
                 Sign Out
               </Nav.Link>
             </Nav.Item>
@@ -148,15 +148,10 @@ class MainView extends React.Component {
               exact
               path='/'
               render={() => {
-                if (!user)
-                  return (
-                    <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-                  );
                 return <MoviesList movies={movies} />;
               }}
             />
           </Container>
-          <Route path='/register' render={() => <RegistrationView />} />
           <Route
             path='/movies/:movieId'
             render={({ match }) => (

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { setUser } from '../../src/actions/actions';
 import { LoadingView } from '../loading-view/loading-view';
+import PropTypes from 'prop-types';
 
 class ProfileView extends React.Component {
   constructor(props) {
@@ -213,3 +214,8 @@ class ProfileView extends React.Component {
 }
 
 export default connect(null, { setUser })(ProfileView);
+
+ProfileView.propTypes = {
+  userInfo: PropTypes.object.isRequired,
+  movies: PropTypes.array.isRequired,
+};

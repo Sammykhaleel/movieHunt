@@ -5,6 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import { MovieCard } from '../movie-card/movie-card';
+import PropTypes from 'prop-types';
 
 const mapStateToProps = (state) => {
   const { visibilityFilter } = state;
@@ -36,3 +37,7 @@ function MoviesList(props) {
 }
 
 export default connect(mapStateToProps)(MoviesList);
+
+MoviesList.propTypes = {
+  movies: PropTypes.array.isRequired,
+};
