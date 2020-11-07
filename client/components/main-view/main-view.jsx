@@ -80,18 +80,18 @@ class MainView extends React.Component {
     if (movies.length === 0 || !userInfo.Username) {
       if (!localStorage.getItem('user')) {
         return (
-          <Router basename='/client'>
-            <div className='main-view'>
-              <h1 className='main-title'>Movie Hunt</h1>
-              <Nav className='justify-content-center main-nav' activeKey='/'>
+          <Router basename="/client">
+            <div className="main-view">
+              <h1 className="main-title">Movie Hunt</h1>
+              <Nav className="justify-content-center main-nav" activeKey="/">
                 <Nav.Item>
-                  <Nav.Link href='/'>Movies</Nav.Link>
+                  <Nav.Link href="/client">Movies</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link href={`/client/users/${user}`}>My Account</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link onClick={this.logOut} href='/client'>
+                  <Nav.Link onClick={this.logOut} href="/client">
                     Sign Out
                   </Nav.Link>
                 </Nav.Item>
@@ -100,7 +100,7 @@ class MainView extends React.Component {
             <Container>
               <Route
                 exact
-                path='/'
+                path="/"
                 render={() => {
                   return (
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
@@ -108,7 +108,7 @@ class MainView extends React.Component {
                 }}
               />
               <Route
-                path='/register'
+                path="/register"
                 render={() => (
                   <RegistrationView
                     onLoggedIn={(user) => this.onLoggedIn(user)}
@@ -127,18 +127,18 @@ class MainView extends React.Component {
     }
 
     return (
-      <Router basename='/client'>
-        <div className='main-view'>
-          <h1 className='main-title'>Movie Hunt</h1>
-          <Nav className='justify-content-center main-nav' activeKey='/'>
+      <Router basename="/client">
+        <div className="main-view">
+          <h1 className="main-title">Movie Hunt</h1>
+          <Nav className="justify-content-center main-nav" activeKey="/">
             <Nav.Item>
-              <Nav.Link href='/client'>Movies</Nav.Link>
+              <Nav.Link href="/client">Movies</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link href={`/client/users/${user}`}>My Account</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link onClick={this.logOut} href='/client'>
+              <Nav.Link onClick={this.logOut} href="/client">
                 Sign Out
               </Nav.Link>
             </Nav.Item>
@@ -146,14 +146,14 @@ class MainView extends React.Component {
           <Container>
             <Route
               exact
-              path='/'
+              path="/"
               render={() => {
                 return <MoviesList movies={movies} />;
               }}
             />
           </Container>
           <Route
-            path='/movies/:movieId'
+            path="/movies/:movieId"
             render={({ match }) => (
               <MovieView
                 movie={movies.find((m) => m._id === match.params.movieId)}
@@ -162,7 +162,7 @@ class MainView extends React.Component {
           />
           <Route
             exact
-            path='/movies/:Title'
+            path="/movies/:Title"
             render={({ match }) => (
               <MovieView
                 movie={movies.find((m) => m.Title === match.params.Title)}
@@ -171,7 +171,7 @@ class MainView extends React.Component {
           />
           <Route
             exact
-            path='/directors/:Name'
+            path="/directors/:Name"
             render={({ match }) => (
               <DirectorView
                 director={
@@ -184,7 +184,7 @@ class MainView extends React.Component {
           />
           <Route
             exact
-            path='/genres/:Name'
+            path="/genres/:Name"
             render={({ match }) => (
               <GenreView
                 genre={
@@ -196,7 +196,7 @@ class MainView extends React.Component {
           />
           <Route
             exact
-            path='/users/:Username'
+            path="/users/:Username"
             render={() => {
               return <ProfileView userInfo={userInfo} movies={movies} />;
             }}
