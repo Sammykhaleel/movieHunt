@@ -52414,7 +52414,6 @@ function RegistrationView(props) {
       login(res.data);
     }).catch(function (e) {
       alert(e.response.data);
-      console.log(e.response, 'Error registering user');
     });
   };
 
