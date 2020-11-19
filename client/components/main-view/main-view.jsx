@@ -74,6 +74,12 @@ class MainView extends React.Component {
     localStorage.removeItem('user');
   }
 
+  componentWillUnmount() {
+    console.log('unmount');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
   render() {
     let { movies, userInfo } = this.props;
     let { user } = this.state;
@@ -108,7 +114,7 @@ class MainView extends React.Component {
                 }}
               />
               <Route
-                path='/register'
+                path='/users'
                 render={() => (
                   <RegistrationView
                     onLoggedIn={(user) => this.onLoggedIn(user)}

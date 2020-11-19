@@ -69,7 +69,7 @@ export function LoginView(props) {
           type='submit'>
           Submit
         </Button>
-        <Link to='/register'>
+        <Link to='/users'>
           <Button className='login-registerBtn' variant='primary' type='button'>
             Register
           </Button>
