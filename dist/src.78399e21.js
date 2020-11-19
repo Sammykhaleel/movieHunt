@@ -52266,7 +52266,7 @@ function LoginView(props) {
       var data = res.data;
       props.onLoggedIn(data);
     }).catch(function (e) {
-      console.log('No such user', e);
+      alert(e.response.data.message);
     });
   };
 
