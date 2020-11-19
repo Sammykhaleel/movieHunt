@@ -41,7 +41,7 @@ class MainView extends React.Component {
         this.props.setMovies(response.data);
       })
       .catch(function (error) {
-        console.log('token error!!!!:', error);
+        console.log('token error!!!:', error);
         localStorage.removeItem('token');
         location.reload();
       });

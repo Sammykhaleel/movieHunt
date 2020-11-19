@@ -52913,7 +52913,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         _this2.props.setMovies(response.data);
       }).catch(function (error) {
-        console.log('token error!!!!:', error);
+        console.log('token error!!!:', error);
         localStorage.removeItem('token');
         location.reload();
       });
