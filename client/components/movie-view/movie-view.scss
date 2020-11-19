@@ -1,15 +1,32 @@
+.backDrop {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  width: 50%;
+  height: auto;
+  opacity: 0.5;
+}
+
+.movieView-posterWrap {
+  display: flex !important;
+  justify-content: center !important;
+}
+
 .movieView-poster {
   border-radius: 0.25rem;
   box-shadow: 9px 7px 12px 3px black;
   background-color: #161616;
   border: 1px solid #343a40;
-  width: 500px;
+  width: 50%;
 }
 
 .movieView-title {
   font-family: 'Lato', sans-serif;
   font-weight: 600;
-  font-size: 40px;
+  font-size: 250%;
   text-align: center;
   color: white;
 }
@@ -35,6 +52,7 @@
   box-shadow: 4px 4px 5px 0px black;
   background-color: #161616;
   border: 1px solid #343a40;
+  font-size: 100%;
   text-align: center;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -51,18 +69,18 @@
 
 .movieView-description > * {
   height: fit-content;
-  font-size: 20px;
+  font-size: 100%;
   border-radius: 0.25rem;
   box-shadow: 4px 4px 5px 0px black;
   background-color: #161616;
   border: 1px solid #343a40;
-  margin: 0 1rem 3rem 1rem;
+  margin: 0 1% 3% 1%;
 }
 .movieView-description > .value {
-  padding: 2rem;
+  padding: 1.5%;
 }
 .movieView-description > .label {
-  padding: 0.8rem;
+  padding: 1.5%;
 }
 
 .label {
@@ -78,4 +96,5 @@
 #favoriteBtn {
   display: flex;
   justify-content: space-between;
+  font-size: 100%;
 }

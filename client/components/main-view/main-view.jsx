@@ -41,7 +41,9 @@ class MainView extends React.Component {
         this.props.setMovies(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        console.log('token error!!!!:', error);
+        localStorage.removeItem('token');
+        location.reload();
       });
 
     axios
@@ -55,7 +57,9 @@ class MainView extends React.Component {
         this.props.setUser(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        console.log('user error!!!', error);
+        localStorage.removeItem('user');
+        location.reload();
       });
   }
 
@@ -74,12 +78,6 @@ class MainView extends React.Component {
     localStorage.removeItem('user');
   }
 
-  componentWillUnmount() {
-    console.log('unmount');
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-  }
-
   render() {
     let { movies, userInfo } = this.props;
     let { user } = this.state;
@@ -88,18 +86,14 @@ class MainView extends React.Component {
         return (
           <Router basename='/client'>
             <div className='main-view'>
-              <h1 className='main-title'>Movie Hunt</h1>
-              <Nav className='justify-content-center main-nav' activeKey='/'>
+              <Nav className='main-nav' activeKey='/'>
+                <Nav.Item>
+                  <Nav.Link href='/'>
+                    <h1 className='main-title'>Movie Hunt</h1>
+                  </Nav.Link>
+                </Nav.Item>
                 <Nav.Item>
                   <Nav.Link href='/'>Movies</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link href={`/client/users/${user}`}>My Account</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link onClick={this.logOut} href='/client'>
-                    Sign Out
-                  </Nav.Link>
                 </Nav.Item>
               </Nav>
             </div>
@@ -135,8 +129,8 @@ class MainView extends React.Component {
     return (
       <Router basename='/client'>
         <div className='main-view'>
-          <h1 className='main-title'>Movie Hunt</h1>
-          <Nav className='justify-content-center main-nav' activeKey='/'>
+          <Nav className='main-nav' activeKey='/'>
+            <h1 className='main-title'>Movie Hunt</h1>
             <Nav.Item>
               <Nav.Link href='/client'>Movies</Nav.Link>
             </Nav.Item>

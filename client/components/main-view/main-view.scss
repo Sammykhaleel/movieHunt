@@ -18,8 +18,9 @@ a:focus {
 }
 
 .main-title {
-  text-align: center;
-  color: white;
+  margin: 5px 20px 0 15px;
+  font-size: 30px;
+  color: #f05454;
 }
 
 body {
@@ -27,9 +28,10 @@ body {
 }
 
 .nav-link {
+  margin: 15px 0 0 15px;
+  padding: 0;
   color: white;
   box-shadow: 0px 9px 5px -10px #6d6d6d;
-  padding-bottom: 0;
 }
 
 .nav-link:hover {
@@ -39,5 +41,11 @@ body {
 }
 
 .main-nav {
-  margin-bottom: 20px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  background-color: rgba(31, 31, 31, 0.8);
+  box-shadow: 0px 6px 4px -4px rgba(31, 31, 31, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }

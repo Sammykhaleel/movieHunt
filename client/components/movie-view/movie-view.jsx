@@ -77,6 +77,9 @@ export class MovieView extends React.Component {
     );
     return (
       <Container className='movieView'>
+        <div className='backDropWrap'>
+          <img src={movie.ImageURL} className='backDrop' />
+        </div>
         <Row>
           <Col xs={{ span: 2, offset: 1 }}>
             <Link to={'/'}>
@@ -95,7 +98,7 @@ export class MovieView extends React.Component {
           </Col>
         </Row>
         <Row className='justify-content-md-center'>
-          <Col xs='auto'>
+          <Col xs='auto' className='movieView-posterWrap'>
             <img
               src={movie.ImageURL}
               alt='Movie Poster'
@@ -148,10 +151,14 @@ export class MovieView extends React.Component {
               <span className='value'>{movie.Genre.Name}</span>
             </div>
           </Row>
-          <div className='movieView-description'>
-            <div className='label'>Description:</div>
-            <div className='value'>{movie.Description}</div>
-          </div>
+          <Row>
+            <Col>
+              <div className='movieView-description'>
+                <span className='label'>Description:</span>
+                <span className='value'>{movie.Description}</span>
+              </div>
+            </Col>
+          </Row>
         </div>
       </Container>
     );

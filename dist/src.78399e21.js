@@ -52082,7 +52082,12 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 
       return _react.default.createElement(_reactBootstrap.Container, {
         className: "movieView"
-      }, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
+      }, _react.default.createElement("div", {
+        className: "backDropWrap"
+      }, _react.default.createElement("img", {
+        src: movie.ImageURL,
+        className: "backDrop"
+      })), _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
         xs: {
           span: 2,
           offset: 1
@@ -52108,7 +52113,8 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, "Add to Favorite"))), _react.default.createElement(_reactBootstrap.Row, {
         className: "justify-content-md-center"
       }, _react.default.createElement(_reactBootstrap.Col, {
-        xs: "auto"
+        xs: "auto",
+        className: "movieView-posterWrap"
       }, _react.default.createElement("img", {
         src: movie.ImageURL,
         alt: "Movie Poster",
@@ -52171,13 +52177,13 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "IMDb Rating: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Genre.Name))), _react.default.createElement("div", {
+      }, movie.Genre.Name))), _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, null, _react.default.createElement("div", {
         className: "movieView-description"
-      }, _react.default.createElement("div", {
+      }, _react.default.createElement("span", {
         className: "label"
-      }, "Description:"), _react.default.createElement("div", {
+      }, "Description:"), _react.default.createElement("span", {
         className: "value"
-      }, movie.Description))));
+      }, movie.Description))))));
     }
   }]);
 
@@ -52393,16 +52399,24 @@ function RegistrationView(props) {
 
     if (!Username) {
       alert('Username is required');
+      return;
     }
 
     if (Username) {
       if (Username.length < 4) {
         alert('Username has to be longer than 4 characters');
+        return;
       }
     }
 
     if (!Password) {
       alert('Password is required');
+      return;
+    }
+
+    if (!Email) {
+      alert('Email is required');
+      return;
     }
 
     _axios.default.post('https://moviehunt-gc.herokuapp.com/users', {
@@ -52413,7 +52427,18 @@ function RegistrationView(props) {
     }).then(function (res) {
       login(res.data);
     }).catch(function (e) {
-      alert(e.response.data);
+      var errorMessages = [];
+
+      if (e.response.data.errors) {
+        e.response.data.errors.map(function (error) {
+          errorMessages.push("".concat(error.param, ": ").concat(error.msg));
+        });
+        alert(errorMessages);
+      } else {
+        alert(e.response.data);
+      }
+
+      console.log(e.response);
     });
   };
 
@@ -52522,13 +52547,7 @@ function RegistrationView(props) {
     onClick: handlesubmit,
     variant: "primary",
     type: "submit"
-  }, "Submit"), _react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, _react.default.createElement(_reactBootstrap.Button, {
-    className: "regstr-loginBtn",
-    variant: "primary",
-    type: "button"
-  }, "Login"))));
+  }, "Submit")));
 }
 
 RegistrationView.propTypes = {
@@ -52894,7 +52913,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         _this2.props.setMovies(response.data);
       }).catch(function (error) {
-        console.log(error);
+        console.log('token error!!!!:', error);
+        localStorage.removeItem('token');
+        location.reload();
       });
 
       _axios.default.get("https://moviehunt-gc.herokuapp.com/users/".concat(localStorage.getItem('user')), {
@@ -52904,7 +52925,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         _this2.props.setUser(response.data);
       }).catch(function (error) {
-        console.log(error);
+        console.log('user error!!!', error);
+        localStorage.removeItem('user');
+        location.reload();
       });
     }
   }, {
@@ -52924,13 +52947,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       localStorage.removeItem('user');
     }
   }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      console.log('unmount');
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -52946,19 +52962,16 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             basename: "/client"
           }, _react.default.createElement("div", {
             className: "main-view"
-          }, _react.default.createElement("h1", {
-            className: "main-title"
-          }, "Movie Hunt"), _react.default.createElement(_reactBootstrap.Nav, {
-            className: "justify-content-center main-nav",
+          }, _react.default.createElement(_reactBootstrap.Nav, {
+            className: "main-nav",
             activeKey: "/"
           }, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
             href: "/"
-          }, "Movies")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
-            href: "/client/users/".concat(user)
-          }, "My Account")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
-            onClick: this.logOut,
-            href: "/client"
-          }, "Sign Out")))), _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactRouterDom.Route, {
+          }, _react.default.createElement("h1", {
+            className: "main-title"
+          }, "Movie Hunt"))), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+            href: "/"
+          }, "Movies")))), _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactRouterDom.Route, {
             exact: true,
             path: "/",
             render: function render() {
@@ -52987,12 +53000,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         basename: "/client"
       }, _react.default.createElement("div", {
         className: "main-view"
+      }, _react.default.createElement(_reactBootstrap.Nav, {
+        className: "main-nav",
+        activeKey: "/"
       }, _react.default.createElement("h1", {
         className: "main-title"
-      }, "Movie Hunt"), _react.default.createElement(_reactBootstrap.Nav, {
-        className: "justify-content-center main-nav",
-        activeKey: "/"
-      }, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
+      }, "Movie Hunt"), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         href: "/client"
       }, "Movies")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         href: "/client/users/".concat(user)
@@ -53242,7 +53255,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40679" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41925" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

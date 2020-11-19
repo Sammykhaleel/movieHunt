@@ -22,14 +22,21 @@ export function RegistrationView(props) {
     e.preventDefault();
     if (!Username) {
       alert('Username is required');
+      return;
     }
     if (Username) {
       if (Username.length < 4) {
         alert('Username has to be longer than 4 characters');
+        return;
       }
     }
     if (!Password) {
       alert('Password is required');
+      return;
+    }
+    if (!Email) {
+      alert('Email is required');
+      return;
     }
     axios
       .post('https://moviehunt-gc.herokuapp.com/users', {
@@ -42,7 +49,16 @@ export function RegistrationView(props) {
         login(res.data);
       })
       .catch((e) => {
-        alert(e.response.data);
+        let errorMessages = [];
+        if (e.response.data.errors) {
+          e.response.data.errors.map((error) => {
+            errorMessages.push(`${error.param}: ${error.msg}`);
+          });
+          alert(errorMessages);
+        } else {
+          alert(e.response.data);
+        }
+        console.log(e.response);
       });
   };
 
@@ -146,11 +162,6 @@ export function RegistrationView(props) {
           type='submit'>
           Submit
         </Button>
-        <Link to='/'>
-          <Button className='regstr-loginBtn' variant='primary' type='button'>
-            Login
-          </Button>
-        </Link>
       </Form>
     </div>
   );
