@@ -114,7 +114,7 @@ class MainView extends React.Component {
                 }}
               />
               <Route
-                path='/users'
+                path='/register'
                 render={() => (
                   <RegistrationView
                     onLoggedIn={(user) => this.onLoggedIn(user)}

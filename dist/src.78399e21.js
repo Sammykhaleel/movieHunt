@@ -52304,7 +52304,7 @@ function LoginView(props) {
     variant: "primary",
     type: "submit"
   }, "Submit"), _react.default.createElement(_reactRouterDom.Link, {
-    to: "/users"
+    to: "/register"
   }, _react.default.createElement(_reactBootstrap.Button, {
     className: "login-registerBtn",
     variant: "primary",
@@ -52413,7 +52413,7 @@ function RegistrationView(props) {
     }).then(function (res) {
       login(res.data);
     }).catch(function (e) {
-      alert('Error registering user');
+      alert(e);
       console.log(e, 'Error registering user');
     });
   };
@@ -52970,7 +52970,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               });
             }
           }), _react.default.createElement(_reactRouterDom.Route, {
-            path: "/users",
+            path: "/register",
             render: function render() {
               return _react.default.createElement(_registrationView.RegistrationView, {
                 onLoggedIn: function onLoggedIn(user) {
