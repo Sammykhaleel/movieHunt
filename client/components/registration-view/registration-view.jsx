@@ -42,8 +42,8 @@ export function RegistrationView(props) {
         login(res.data);
       })
       .catch((e) => {
-        alert(e);
-        console.log(e, 'Error registering user');
+        alert(e.response.data);
+        console.log(e.response, 'Error registering user');
       });
   };
 
