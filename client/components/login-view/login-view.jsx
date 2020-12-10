@@ -9,7 +9,16 @@ export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handlesubmit = (e) => {
+  /**
+   * Triggers when "Login" button is clicked. This method will send <code>POST</code>
+   * request to the server with header contains <code>Username</code> and <code>Password</code>
+   * Then, with response data, calls <code>{@link onLoggedIn|onLoggedIn}</code> method from its props.
+   * @param {MouseEvent} e On click "Login" button
+   * @name handlesubmitLogin
+   * @method
+   * @async
+   */
+  const handlesubmitLogin = (e) => {
     e.preventDefault();
     if (!username) {
       alert('Username is required');
@@ -64,7 +73,7 @@ export function LoginView(props) {
         </Form.Group>
         <Button
           className='login-submitBtn'
-          onClick={handlesubmit}
+          onClick={handlesubmitLogin}
           variant='primary'
           type='submit'>
           Submit

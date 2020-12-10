@@ -16,47 +16,45 @@ export class MovieView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      favoriteMovies: [],
+      favoriteMovies: this.props.FavoriteMovies,
+      addedMovie: '',
     };
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
-          'user'
-        )}`,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        }
-      )
-      .then((res) => {
-        this.setState({
-          favoriteMovies: res.data.FavoriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
+  /**
+   * This method will add selected movie's ID to user's favorite list. <br/>
+   * It checks if selected movie already exists on user's favorite list, then,
+   * it sends <code>POST</code> request to server to update favorite list.
+   * @param {Object} movie Selected movie data received from click event
+   * @method
+   * @async
+   * @global
+   */
   addToFavorite(movie) {
-    if (this.state.favoriteMovies.includes(movie._id)) {
-      alert(movie.Title + ' already exist in your favorite list');
-    } else {
-      axios
-        .post(
-          `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
-            'user'
-          )}/favorite/add/${movie._id}`
-        )
-        .then(() => {
-          alert(movie.Title + ' has been added to your favorite list');
-          this.componentDidMount();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    try {
+      if (
+        this.state.favoriteMovies.includes(movie._id) ||
+        this.state.addedMovie.includes(movie._id)
+      ) {
+        alert(movie.Title + ' already exist in your favorite list');
+      } else {
+        axios
+          .post(
+            `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
+              'user'
+            )}/favorite/add/${movie._id}`
+          )
+          .then(() => {
+            alert(movie.Title + ' has been added to your favorite list');
+            this.setState({ addedMovie: movie._id });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    } catch (error) {
+      console.log(error);
+      location.reload();
     }
   }
 

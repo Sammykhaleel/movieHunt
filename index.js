@@ -55,6 +55,13 @@ app.get('/', function (req, res) {
 });
 
 // Get all users
+/**
+ * Class representing a socket connection.
+ *
+ * @class
+ * @tutorial socket-tutorial
+ * @name getuser
+ */
 app.get('/users', (req, res) => {
   Users.find()
     .then((users) => {

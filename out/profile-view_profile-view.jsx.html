@@ -1,4 +1,32 @@
-import React from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: profile-view/profile-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: profile-view/profile-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
 import { Container, Button, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import './profile-view.scss';
@@ -21,8 +49,8 @@ class ProfileView extends React.Component {
 
   /**
    * Receives a movie data to delete from user's favorite list.
-   * Sends <code>POST</code> request.
-   * @param {Object<Array>} movie Movie data
+   * Sends &lt;code>POST&lt;/code> request.
+   * @param {Object&lt;Array>} movie Movie data
    * @name deleteFav
    * @async
    * @method
@@ -45,15 +73,15 @@ class ProfileView extends React.Component {
   }
 
   /**
-   * Updates user information. Sends <code>PUT</code> request with header
-   * <pre>
+   * Updates user information. Sends &lt;code>PUT&lt;/code> request with header
+   * &lt;pre>
    * {
    *    Username: string,
    *    Password: string,
    *    Email: string,
    *    Birthday: Date.slice(0, 10),
    * }
-   * </pre>
+   * &lt;/pre>
    * @param {String} username
    * @param {String} password
    * @param {String} email
@@ -84,7 +112,7 @@ class ProfileView extends React.Component {
   }
 
   /**
-   * Deletes user's account permanently. Sends <code>DELETE</code> request.
+   * Deletes user's account permanently. Sends &lt;code>DELETE&lt;/code> request.
    * @param {String} username
    * @async
    * @method
@@ -115,13 +143,13 @@ class ProfileView extends React.Component {
 
     if (!Username)
       return (
-        <div>
-          <LoadingView />
-        </div>
+        &lt;div>
+          &lt;LoadingView />
+        &lt;/div>
       );
 
     var fav = [];
-    for (let i = 0; i < userInfo.FavoriteMovies.length; i++) {
+    for (let i = 0; i &lt; userInfo.FavoriteMovies.length; i++) {
       var favMovie = movies.find((m) => {
         return m._id === userInfo.FavoriteMovies[i];
       });
@@ -130,23 +158,23 @@ class ProfileView extends React.Component {
 
     if (fav === undefined)
       return (
-        <div>
-          <LoadingView />
-        </div>
+        &lt;div>
+          &lt;LoadingView />
+        &lt;/div>
       );
     return (
-      <Container className='profileView'>
-        <Button
+      &lt;Container className='profileView'>
+        &lt;Button
           onClick={() => (location.href = '/')}
           variant='dark'
           className='backBtn'>
-          <i className='fas fa-arrow-left'></i> Back
-        </Button>
-        <Row className='profileView-container'>
-          <Form>
-            <Form.Group controlId='formBasicUsername'>
-              <Form.Label>Username</Form.Label>
-              <Form.Control
+          &lt;i className='fas fa-arrow-left'>&lt;/i> Back
+        &lt;/Button>
+        &lt;Row className='profileView-container'>
+          &lt;Form>
+            &lt;Form.Group controlId='formBasicUsername'>
+              &lt;Form.Label>Username&lt;/Form.Label>
+              &lt;Form.Control
                 placeholder={Username}
                 onChange={(e) => {
                   this.setState({ Username: e.target.value });
@@ -155,10 +183,10 @@ class ProfileView extends React.Component {
                   }
                 }}
               />
-            </Form.Group>
-            <Form.Group controlId='formBasicPassword'>
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+            &lt;/Form.Group>
+            &lt;Form.Group controlId='formBasicPassword'>
+              &lt;Form.Label>Password&lt;/Form.Label>
+              &lt;Form.Control
                 type='password'
                 placeholder='Password'
                 onChange={(e) => {
@@ -168,11 +196,11 @@ class ProfileView extends React.Component {
                   }
                 }}
               />
-            </Form.Group>
+            &lt;/Form.Group>
 
-            <Form.Group controlId='formBasicEmail'>
-              <Form.Label>Email</Form.Label>
-              <Form.Control
+            &lt;Form.Group controlId='formBasicEmail'>
+              &lt;Form.Label>Email&lt;/Form.Label>
+              &lt;Form.Control
                 type='email'
                 placeholder={Email}
                 onChange={(e) => {
@@ -182,10 +210,10 @@ class ProfileView extends React.Component {
                   }
                 }}
               />
-            </Form.Group>
-            <Form.Group controlId='formBasicBirthday'>
-              <Form.Label>Birthday</Form.Label>
-              <Form.Control
+            &lt;/Form.Group>
+            &lt;Form.Group controlId='formBasicBirthday'>
+              &lt;Form.Label>Birthday&lt;/Form.Label>
+              &lt;Form.Control
                 type='date'
                 placeholder={Birthday}
                 onChange={(e) => {
@@ -197,9 +225,9 @@ class ProfileView extends React.Component {
                   }
                 }}
               />
-            </Form.Group>
-            <Row className='profileView-btnContainer'>
-              <Button
+            &lt;/Form.Group>
+            &lt;Row className='profileView-btnContainer'>
+              &lt;Button
                 className='profileView-updateBtn btn-dark'
                 variant='btn-dark'
                 type='submit'
@@ -213,8 +241,8 @@ class ProfileView extends React.Component {
                   );
                 }}>
                 Update
-              </Button>
-              <Button
+              &lt;/Button>
+              &lt;Button
                 className='profileView-closeBtn btn-dark'
                 variant='btn-dark'
                 type='submit'
@@ -223,27 +251,27 @@ class ProfileView extends React.Component {
                   this.deleteUser(Username);
                 }}>
                 Close account
-              </Button>
-            </Row>
-          </Form>
-        </Row>
-        <h3>Favorite Movies</h3>
-        <Row>
+              &lt;/Button>
+            &lt;/Row>
+          &lt;/Form>
+        &lt;/Row>
+        &lt;h3>Favorite Movies&lt;/h3>
+        &lt;Row>
           {fav.map((m, index) => {
             return (
-              <Col className='profile-movieCard' sm='4' key={index}>
-                <Button
+              &lt;Col className='profile-movieCard' sm='4' key={index}>
+                &lt;Button
                   onClick={() => this.deleteFav(m, index)}
                   variant='dark'
                   className='profile-deleteBtn'>
                   Delete
-                </Button>
-                <MovieCard movie={m} key={index} />
-              </Col>
+                &lt;/Button>
+                &lt;MovieCard movie={m} key={index} />
+              &lt;/Col>
             );
           })}
-        </Row>
-      </Container>
+        &lt;/Row>
+      &lt;/Container>
     );
   }
 }
@@ -254,3 +282,26 @@ ProfileView.propTypes = {
   userInfo: PropTypes.object.isRequired,
   movies: PropTypes.array.isRequired,
 };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addToFavorite">addToFavorite</a></li><li><a href="global.html#deleteFav">deleteFav</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getInfo">getInfo</a></li><li><a href="global.html#handlesubmitLogin">handlesubmitLogin</a></li><li><a href="global.html#handlesubmitRegister">handlesubmitRegister</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#updateUser">updateUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Dec 10 2020 02:55:25 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

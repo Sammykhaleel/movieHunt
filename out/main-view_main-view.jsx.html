@@ -1,4 +1,32 @@
-import React from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view/main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view/main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -36,9 +64,9 @@ class MainView extends React.Component {
 
   /**
    * This method uses received access token to receive movies and user data.
-   * (<code>GET</code> requests)
+   * (&lt;code>GET&lt;/code> requests)
    * If returning users' access token saved in their local storage are valid,
-   * <code>getInfo</code> will use saved token. <br/>
+   * &lt;code>getInfo&lt;/code> will use saved token. &lt;br/>
    * If the token in local storage is expired, it will remove token from the storage
    * and get new token from the server.
    * @param {String} token Access Token
@@ -100,91 +128,91 @@ class MainView extends React.Component {
     if (movies.length === 0 || !userInfo.Username) {
       if (!localStorage.getItem('user')) {
         return (
-          <Router basename='/client'>
-            <div className='main-view'>
-              <Nav className='main-nav' activeKey='/'>
-                <Nav.Item>
-                  <Nav.Link href='/'>
-                    <h1 className='main-title'>Movie Hunt</h1>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link href='/'>Movies</Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </div>
-            <Container>
-              <Route
+          &lt;Router basename='/client'>
+            &lt;div className='main-view'>
+              &lt;Nav className='main-nav' activeKey='/'>
+                &lt;Nav.Item>
+                  &lt;Nav.Link href='/'>
+                    &lt;h1 className='main-title'>Movie Hunt&lt;/h1>
+                  &lt;/Nav.Link>
+                &lt;/Nav.Item>
+                &lt;Nav.Item>
+                  &lt;Nav.Link href='/'>Movies&lt;/Nav.Link>
+                &lt;/Nav.Item>
+              &lt;/Nav>
+            &lt;/div>
+            &lt;Container>
+              &lt;Route
                 exact
                 path='/'
                 render={() => {
                   return (
-                    <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                    &lt;LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   );
                 }}
               />
-              <Route
+              &lt;Route
                 path='/register'
                 render={() => (
-                  <RegistrationView
+                  &lt;RegistrationView
                     onLoggedIn={(user) => this.onLoggedIn(user)}
                   />
                 )}
               />
-            </Container>
-          </Router>
+            &lt;/Container>
+          &lt;/Router>
         );
       }
       return (
-        <div>
-          <LoadingView />
-        </div>
+        &lt;div>
+          &lt;LoadingView />
+        &lt;/div>
       );
     }
 
     return (
-      <Router basename='/client'>
-        <div className='main-view'>
-          <Nav className='main-nav' activeKey='/'>
-            <h1 className='main-title'>Movie Hunt</h1>
-            <Nav.Item>
-              <Nav.Link href='/client'>Movies</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href={`/client/users/${user}`}>My Account</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link onClick={this.logOut} href='/client'>
+      &lt;Router basename='/client'>
+        &lt;div className='main-view'>
+          &lt;Nav className='main-nav' activeKey='/'>
+            &lt;h1 className='main-title'>Movie Hunt&lt;/h1>
+            &lt;Nav.Item>
+              &lt;Nav.Link href='/client'>Movies&lt;/Nav.Link>
+            &lt;/Nav.Item>
+            &lt;Nav.Item>
+              &lt;Nav.Link href={`/client/users/${user}`}>My Account&lt;/Nav.Link>
+            &lt;/Nav.Item>
+            &lt;Nav.Item>
+              &lt;Nav.Link onClick={this.logOut} href='/client'>
                 Sign Out
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-          <Container>
-            <Route
+              &lt;/Nav.Link>
+            &lt;/Nav.Item>
+          &lt;/Nav>
+          &lt;Container>
+            &lt;Route
               exact
               path='/'
               render={() => {
-                return <MoviesList movies={movies} />;
+                return &lt;MoviesList movies={movies} />;
               }}
             />
-          </Container>
-          <Route
+          &lt;/Container>
+          &lt;Route
             exact
             path='/movies/:Title'
             render={({ match }) => (
-              <MovieView
+              &lt;MovieView
                 movie={movies.find((m) => m.Title === match.params.Title)}
                 FavoriteMovies={
-                  userdata.FavoriteMovies && userdata.FavoriteMovies
+                  userdata.FavoriteMovies &amp;&amp; userdata.FavoriteMovies
                 }
               />
             )}
           />
-          <Route
+          &lt;Route
             exact
             path='/directors/:Name'
             render={({ match }) => (
-              <DirectorView
+              &lt;DirectorView
                 director={
                   movies.find((m) => m.Director.Name === match.params.Name)
                     .Director
@@ -193,11 +221,11 @@ class MainView extends React.Component {
               />
             )}
           />
-          <Route
+          &lt;Route
             exact
             path='/genres/:Name'
             render={({ match }) => (
-              <GenreView
+              &lt;GenreView
                 genre={
                   movies.find((m) => m.Genre.Name === match.params.Name).Genre
                 }
@@ -205,15 +233,15 @@ class MainView extends React.Component {
               />
             )}
           />
-          <Route
+          &lt;Route
             exact
             path='/users/:Username'
             render={() => {
-              return <ProfileView userInfo={userInfo} movies={movies} />;
+              return &lt;ProfileView userInfo={userInfo} movies={movies} />;
             }}
           />
-        </div>
-      </Router>
+        &lt;/div>
+      &lt;/Router>
     );
   }
 }
@@ -223,3 +251,26 @@ let mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { setMovies, setUser })(MainView);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addToFavorite">addToFavorite</a></li><li><a href="global.html#deleteFav">deleteFav</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getInfo">getInfo</a></li><li><a href="global.html#handlesubmitLogin">handlesubmitLogin</a></li><li><a href="global.html#handlesubmitRegister">handlesubmitRegister</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#updateUser">updateUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Dec 10 2020 02:55:25 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
