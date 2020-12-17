@@ -94,7 +94,7 @@ export class MovieView extends React.Component {
               variant='dark'
               className='favoriteBtn'
               onClick={() => this.addToFavorite(movie)}>
-              Add to Favorite
+              Add to Favorite@@@@@@@
             </Button>
           </Col>
         </Row>
