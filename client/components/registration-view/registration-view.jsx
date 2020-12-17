@@ -121,6 +121,10 @@ export function RegistrationView(props) {
     </Tooltip>
   );
 
+  const backToLogin = () => {
+    window.location.herf = '/client';
+  };
+
   return (
     <div className='regstr-div'>
       <Form className='regstr-form'>
@@ -181,13 +185,24 @@ export function RegistrationView(props) {
             <Form.Text className='text-muted'>YYYY-MM-DD</Form.Text>
           </Form.Group>
         </OverlayTrigger>
-        <Button
-          className='regstr-submitBtn'
-          onClick={handlesubmitRegister}
-          variant='primary'
-          type='submit'>
-          Submit
-        </Button>
+        <div className='buttonWrap'>
+          <Button
+            className='regstr-submitBtn'
+            onClick={handlesubmitRegister}
+            variant='primary'
+            type='submit'>
+            Submit
+          </Button>
+          <Button
+            className='regstr-backToLogin'
+            onClick={backToLogin}
+            variant='primary'
+            type='submit'>
+            <Link to='/' className='regstr-backToLogin'>
+              Back to login
+            </Link>
+          </Button>
+        </div>
       </Form>
     </div>
   );

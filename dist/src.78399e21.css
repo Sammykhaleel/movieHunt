@@ -93,7 +93,7 @@
   right: 0;
   top: 0;
   z-index: -1;
-  width: 50%;
+  width: 100%;
   height: auto;
   opacity: 0.5;
 }
@@ -234,6 +234,16 @@
 .regstr-form {
   width: 50%;
   height: 50%;
+}
+
+.regstr-backToLogin {
+  color: white;
+}
+
+.regstr-backToLogin:hover {
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
 }
 .directorView-dirName {
   color: White;

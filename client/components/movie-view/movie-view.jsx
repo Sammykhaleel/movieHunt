@@ -18,6 +18,7 @@ export class MovieView extends React.Component {
     this.state = {
       favoriteMovies: this.props.FavoriteMovies,
       addedMovie: '',
+      Title: this.props.movie.Title,
     };
   }
 
@@ -61,6 +62,8 @@ export class MovieView extends React.Component {
   render() {
     const { movie } = this.props;
     if (!movie) return null;
+    console.log(this.state.Title);
+    console.log(movie.Title.toString());
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     const directorTooltip = (props) => (
@@ -76,7 +79,7 @@ export class MovieView extends React.Component {
     return (
       <Container className='movieView'>
         <div className='backDropWrap'>
-          <img src={movie.ImageURL} className='backDrop' />
+          <img src={movie.Backdrop} className='backDrop' />
         </div>
         <Row>
           <Col xs={{ span: 2, offset: 1 }}>

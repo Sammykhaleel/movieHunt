@@ -52058,7 +52058,8 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       favoriteMovies: _this.props.FavoriteMovies,
-      addedMovie: ''
+      addedMovie: '',
+      Title: _this.props.movie.Title
     };
     return _this;
   }
@@ -52104,6 +52105,8 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 
       var movie = this.props.movie;
       if (!movie) return null;
+      console.log(this.state.Title);
+      console.log(movie.Title.toString());
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
 
@@ -52124,7 +52127,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement("div", {
         className: "backDropWrap"
       }, _react.default.createElement("img", {
-        src: movie.ImageURL,
+        src: movie.Backdrop,
         className: "backDrop"
       })), _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
         xs: {
@@ -52549,6 +52552,10 @@ function RegistrationView(props) {
     }, props), "Use calender icon for your birthday,");
   };
 
+  var backToLogin = function backToLogin() {
+    window.location.herf = '/client';
+  };
+
   return _react.default.createElement("div", {
     className: "regstr-div"
   }, _react.default.createElement(_reactBootstrap.Form, {
@@ -52618,12 +52625,22 @@ function RegistrationView(props) {
     placeholder: "Enter Birthday"
   }), _react.default.createElement(_reactBootstrap.Form.Text, {
     className: "text-muted"
-  }, "YYYY-MM-DD"))), _react.default.createElement(_reactBootstrap.Button, {
+  }, "YYYY-MM-DD"))), _react.default.createElement("div", {
+    className: "buttonWrap"
+  }, _react.default.createElement(_reactBootstrap.Button, {
     className: "regstr-submitBtn",
     onClick: handlesubmitRegister,
     variant: "primary",
     type: "submit"
-  }, "Submit")));
+  }, "Submit"), _react.default.createElement(_reactBootstrap.Button, {
+    className: "regstr-backToLogin",
+    onClick: backToLogin,
+    variant: "primary",
+    type: "submit"
+  }, _react.default.createElement(_reactRouterDom.Link, {
+    to: "/",
+    className: "regstr-backToLogin"
+  }, "Back to login")))));
 }
 
 RegistrationView.propTypes = {
@@ -53344,7 +53361,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34359" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39873" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
