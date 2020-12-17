@@ -104,12 +104,12 @@ class MainView extends React.Component {
             <div className='main-view'>
               <Nav className='main-nav' activeKey='/'>
                 <Nav.Item>
-                  <Nav.Link href='/'>
+                  <Nav.Link href='/client'>
                     <h1 className='main-title'>Movie Hunt</h1>
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href='/'>Movies</Nav.Link>
+                  <Nav.Link href='/client'>Movies</Nav.Link>
                 </Nav.Item>
               </Nav>
             </div>
