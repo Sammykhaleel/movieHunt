@@ -98,3 +98,67 @@
   justify-content: space-between;
   font-size: 100%;
 }
+
+.btnWrap {
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1rem 0 1rem;
+  margin: 0;
+}
+
+.backBtnWrap {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  align-self: center;
+}
+
+.favBtnWrap {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+@media screen and (max-width: 1100px) {
+  .backDrop {
+    height: 100%;
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .favoriteBtn {
+    font-size: 12px;
+  }
+  .backBtn {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .movieView-info {
+    font-size: 14px;
+  }
+  .movieView-description {
+    flex-direction: column;
+  }
+  .movieView-description > .label {
+    width: fit-content;
+  }
+  .movieView {
+    margin: 0;
+  }
+  .btnWrap {
+    padding: 0;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .favoriteBtn {
+    font-size: 10px;
+  }
+  .backBtn {
+    font-size: 10px;
+  }
+}

@@ -63,8 +63,6 @@ export class MovieView extends React.Component {
     const { movie } = this.props;
     const { Backdrop } = movie;
     if (!movie) return null;
-    console.log(this.state.Title);
-    console.log(movie.Title.toString());
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     const directorTooltip = (props) => (
@@ -82,15 +80,15 @@ export class MovieView extends React.Component {
         <div className='backDropWrap'>
           <img src={Backdrop} className='backDrop' />
         </div>
-        <Row>
-          <Col xs={{ span: 2, offset: 1 }}>
+        <Row className='btnWrap'>
+          <Col className='backBtnWrap' xs={{ span: 2, offset: 1 }}>
             <Link to={'/'}>
               <Button variant='dark' className='backBtn'>
                 <i className='fas fa-arrow-left'></i> Back
               </Button>
             </Link>
           </Col>
-          <Col xs={{ span: 2, offset: 7 }}>
+          <Col className='favBtnWrap' xs={{ span: 2, offset: 7 }}>
             <Button
               variant='dark'
               className='favoriteBtn'

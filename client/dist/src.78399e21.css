@@ -1,0 +1,466 @@
+.card {
+  box-shadow: 4px 4px 5px 0px black;
+  border: none;
+  height: 100%;
+}
+
+.card-img-top {
+  background-color: #181818;
+}
+
+.card-body {
+  text-align: center;
+  padding: 8px;
+  background-color: #181818;
+}
+
+.card-text {
+  margin-bottom: 0;
+  line-height: 1.1;
+  color: white;
+}
+
+.movieCard-img {
+  padding: 5px;
+}
+
+.movieCard-description {
+  padding-top: 10px;
+  text-align: left;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+}
+
+.movieCard-button {
+  margin-top: 7%;
+}
+
+.movieCard-title {
+  color: white;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.movieCard-cardBody .detailInfo {
+  color: white;
+  text-align: right;
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+}
+.profileView {
+  color: white;
+}
+
+.profileView-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
+
+.profileView-updateBtn,
+.profileView-closeBtn {
+  color: white;
+}
+
+.profileView-btnContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-movieCard {
+  margin-top: 5%;
+}
+
+.profile-deleteBtn {
+  width: 100%;
+}
+.loading {
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading-title {
+  font-size: 40px;
+}
+.backDrop {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: auto;
+  opacity: 0.5;
+}
+
+.movieView-posterWrap {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.movieView-poster {
+  border-radius: 0.25rem;
+  box-shadow: 9px 7px 12px 3px black;
+  background-color: #161616;
+  border: 1px solid #343a40;
+  width: 50%;
+}
+
+.movieView-title {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 250%;
+  text-align: center;
+  color: white;
+}
+
+.movieView-info {
+  font-family: "Lato", sans-serif;
+  color: white;
+}
+
+.movieView-details {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 30px 0;
+  font-family: "Lato", sans-serif;
+}
+
+.movieView-details > *,
+.movieView-directorBtn,
+.movieView-genreBtn {
+  padding: 8px 5px 8px 5px;
+  margin: 0 5px 5px 0;
+  border-radius: 0.25rem;
+  box-shadow: 4px 4px 5px 0px black;
+  background-color: #161616;
+  border: 1px solid #343a40;
+  font-size: 100%;
+  text-align: center;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.movieView-directorBtn:hover,
+.movieView-genreBtn:hover {
+  text-decoration: none;
+}
+
+.movieView-description {
+  display: flex;
+}
+
+.movieView-description > * {
+  height: fit-content;
+  font-size: 100%;
+  border-radius: 0.25rem;
+  box-shadow: 4px 4px 5px 0px black;
+  background-color: #161616;
+  border: 1px solid #343a40;
+  margin: 0 1% 3% 1%;
+}
+
+.movieView-description > .value {
+  padding: 1.5%;
+}
+
+.movieView-description > .label {
+  padding: 1.5%;
+}
+
+.label {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.btn-dark {
+  box-shadow: 4px 4px 5px 0px black;
+  background-color: #161616;
+}
+
+#favoriteBtn {
+  display: flex;
+  justify-content: space-between;
+  font-size: 100%;
+}
+
+.btnWrap {
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1rem 0 1rem;
+  margin: 0;
+}
+
+.backBtnWrap {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  align-self: center;
+}
+
+.favBtnWrap {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+@media screen and (max-width: 1100px) {
+  .backDrop {
+    height: 100%;
+    width: auto;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .favoriteBtn {
+    font-size: 12px;
+  }
+
+  .backBtn {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .movieView-info {
+    font-size: 14px;
+  }
+
+  .movieView-description {
+    flex-direction: column;
+  }
+
+  .movieView-description > .label {
+    width: fit-content;
+  }
+
+  .movieView {
+    margin: 0;
+  }
+
+  .btnWrap {
+    padding: 0;
+    justify-content: space-evenly;
+  }
+}
+@media screen and (max-width: 375px) {
+  .favoriteBtn {
+    font-size: 10px;
+  }
+
+  .backBtn {
+    font-size: 10px;
+  }
+}
+.login-submitBtn,
+.login-loginBtn {
+  margin: 5px;
+}
+
+.login-pageTitle {
+  color: white;
+}
+
+.login-label {
+  color: white;
+}
+
+.login-div {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  width: 100%;
+}
+
+.login-form {
+  width: 50%;
+  height: 50%;
+}
+.regstr-submitBtn,
+.regstr-loginBtn {
+  margin: 5px;
+}
+
+.regstr-pageTitle {
+  color: white;
+}
+
+.regstr-label {
+  color: white;
+}
+
+.regstr-div {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  width: 100%;
+}
+
+.regstr-form {
+  width: 50%;
+  height: 50%;
+}
+
+.regstr-backToLogin {
+  color: white;
+}
+
+.regstr-backToLogin:hover {
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+.directorView-dirName {
+  color: White;
+  padding-top: 50px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.directorView-dirBirth {
+  color: White;
+  padding-top: 10px;
+  font-family: "Lato", sans-serif;
+}
+
+.directorView-dirDeath {
+  color: White;
+  font-family: "Lato", sans-serif;
+}
+
+.directorView-dirBio {
+  color: White;
+  text-align: center;
+  padding: 50px 0 50px 0;
+  font-family: "Lato", sans-serif;
+}
+
+.directorView-more {
+  color: White;
+  font-size: 30px;
+  text-align: center;
+  padding-bottom: 10px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.directorView-movieCard {
+  margin-top: 5%;
+}
+.genreView-genreName {
+  color: White;
+  padding-top: 50px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.genreView-description {
+  color: White;
+  padding: 50px 0 50px 0;
+  font-family: "Lato", sans-serif;
+}
+
+.genreView-more {
+  color: White;
+  font-size: 30px;
+  text-align: center;
+  padding-bottom: 10px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.genreView-movieCard {
+  margin-top: 5%;
+}
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+.main-cardContainer {
+  justify-content: center;
+}
+
+.main-card {
+  margin-bottom: 40px;
+  transition: 0.5s;
+}
+.main-card:hover {
+  opacity: 0.5;
+  transition: 0.7s;
+}
+
+.main-title {
+  margin: 5px 20px 0 15px;
+  font-size: 30px;
+  color: #f05454;
+}
+
+body {
+  background-color: #121212;
+}
+
+.nav-link {
+  margin: 15px 0 0 15px;
+  padding: 0;
+  color: white;
+  box-shadow: 0px 9px 5px -10px #6d6d6d;
+}
+
+.nav-link:hover {
+  color: white;
+  box-shadow: 0px 6px 4px -4px #6d6d6d;
+  padding-bottom: 0;
+}
+
+.main-nav {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  background-color: rgba(31, 31, 31, 0.8);
+  box-shadow: 0px 6px 4px -4px rgba(31, 31, 31, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+@media screen and (max-width: 445px) {
+  .main-title {
+    font-size: 20px;
+    align-self: center;
+  }
+
+  .nav-item {
+    height: 100%;
+    align-self: flex-end;
+    font-size: 12px;
+  }
+
+  .nav-link {
+    margin-top: 0;
+  }
+}
+@media screen and (max-width: 340px) {
+  .main-title {
+    font-size: 20px;
+    margin: 5px 5px 0px 5px;
+  }
+
+  .nav-item {
+    height: 100%;
+    align-self: flex-end;
+    font-size: 12px;
+  }
+
+  .nav-link {
+    margin-top: 0;
+    margin-left: 10px;
+  }
+}
+.moviehunt {
+  color: steelblue;
+}
+
+/*# sourceMappingURL=/src.78399e21.css.map */

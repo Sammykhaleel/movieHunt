@@ -49,3 +49,34 @@ body {
   top: 0;
   z-index: 100;
 }
+
+@media screen and (max-width: 445px) {
+  .main-title {
+    font-size: 20px;
+    align-self: center;
+  }
+  .nav-item {
+    height: 100%;
+    align-self: flex-end;
+    font-size: 12px;
+  }
+  .nav-link {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .main-title {
+    font-size: 20px;
+    margin: 5px 5px 0px 5px;
+  }
+  .nav-item {
+    height: 100%;
+    align-self: flex-end;
+    font-size: 12px;
+  }
+  .nav-link {
+    margin-top: 0;
+    margin-left: 10px;
+  }
+}

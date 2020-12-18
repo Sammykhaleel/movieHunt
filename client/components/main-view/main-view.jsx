@@ -24,7 +24,6 @@ class MainView extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -96,7 +95,6 @@ class MainView extends React.Component {
   render() {
     const { movies, userInfo } = this.props;
     const { user, userdata } = this.state;
-    console.log(userdata);
     if (movies.length === 0 || !userInfo.Username) {
       if (!localStorage.getItem('user')) {
         return (
