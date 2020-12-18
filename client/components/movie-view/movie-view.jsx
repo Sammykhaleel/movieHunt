@@ -61,6 +61,7 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie } = this.props;
+    const { Backdrop } = movie;
     if (!movie) return null;
     console.log(this.state.Title);
     console.log(movie.Title.toString());
@@ -79,7 +80,7 @@ export class MovieView extends React.Component {
     return (
       <Container className='movieView'>
         <div className='backDropWrap'>
-          <img src={movie.Backdrop} className='backDrop' />
+          <img src={Backdrop} className='backDrop' />
         </div>
         <Row>
           <Col xs={{ span: 2, offset: 1 }}>
