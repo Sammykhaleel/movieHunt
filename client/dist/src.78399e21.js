@@ -32710,7 +32710,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"./../utils":"../node_modules/axios/lib/utils.js","./../core/settle":"../node_modules/axios/lib/core/settle.js","./../helpers/cookies":"../node_modules/axios/lib/helpers/cookies.js","./../helpers/buildURL":"../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"../node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../node_modules/axios/lib/core/createError.js"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
+},{"./../utils":"../node_modules/axios/lib/utils.js","./../core/settle":"../node_modules/axios/lib/core/settle.js","./../helpers/cookies":"../node_modules/axios/lib/helpers/cookies.js","./../helpers/buildURL":"../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"../node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../node_modules/axios/lib/core/createError.js"}],"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -33020,7 +33020,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"../node_modules/axios/lib/adapters/xhr.js","./adapters/http":"../node_modules/axios/lib/adapters/xhr.js","process":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
+},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"../node_modules/axios/lib/adapters/xhr.js","./adapters/http":"../node_modules/axios/lib/adapters/xhr.js","process":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
 'use strict';
 
 var utils = require('./../utils');
@@ -51410,7 +51410,7 @@ exports.default = _default;
 VisibilityFilterInput.propTypes = {
   visibilityFilter: _propTypes.default.string.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","../../src/actions/actions":"actions/actions.js"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","../../src/actions/actions":"actions/actions.js"}],"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -51442,7 +51442,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -51477,12 +51477,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../components/movie-card/movie-card.scss":[function(require,module,exports) {
+},{"./bundle-url":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../components/movie-card/movie-card.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/movie-card/movie-card.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/movie-card/movie-card.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51612,9 +51612,9 @@ function MoviesList(props) {
       visibilityFilter = props.visibilityFilter;
   var filteredMovies = movies;
 
-  if (visibilityFilter !== '') {
+  if (visibilityFilter !== "") {
     filteredMovies = movies.filter(function (m) {
-      return m.Title.includes(visibilityFilter);
+      return m.Title.toLocaleLowerCase().includes(visibilityFilter.toLocaleLowerCase());
     });
   }
 
@@ -51651,12 +51651,12 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/loading-view/loading-view.scss":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/loading-view/loading-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/loading-view/loading-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/loading-view/loading-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51774,10 +51774,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function deleteFav(movie) {
       var _this2 = this;
 
-      _axios.default.post("https://moviehunt-gc.herokuapp.com/users/".concat(localStorage.getItem('user'), "/favorite/remove/").concat(movie._id)).then(function (res) {
+      _axios.default.post("https://moviehunt-gc.herokuapp.com/users/".concat(localStorage.getItem("user"), "/favorite/remove/").concat(movie._id)).then(function (res) {
         _this2.props.setUser(res.data);
 
-        alert(movie.Title + ' has been removed from your favorite list');
+        alert(movie.Title + " has been removed from your favorite list");
       }).catch(function (error) {
         console.log(error);
       });
@@ -51804,13 +51804,13 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateUser",
     value: function updateUser(username, password, email, birthday) {
-      _axios.default.put("https://moviehunt-gc.herokuapp.com/users/".concat(localStorage.getItem('user')), {
+      _axios.default.put("https://moviehunt-gc.herokuapp.com/users/".concat(localStorage.getItem("user")), {
         Username: username,
         Password: password,
         Email: email,
         Birthday: birthday.slice(0, 10)
       }).then(function () {
-        alert(username + ' has been updated');
+        alert(username + " has been updated");
       }).catch(function (error) {
         console.log(error);
       });
@@ -51827,11 +51827,11 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteUser",
     value: function deleteUser(username) {
-      _axios.default.delete("https://moviehunt-gc.herokuapp.com/users/".concat(localStorage.getItem('user'))).then(function () {
-        alert(username + ' has been deleted');
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        window.location.pathname = '/';
+      _axios.default.delete("https://moviehunt-gc.herokuapp.com/users/".concat(localStorage.getItem("user"))).then(function () {
+        alert(username + " has been deleted");
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        window.location.pathname = "/";
       }).catch(function (error) {
         console.log(error);
       });
@@ -51869,7 +51869,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "profileView"
       }, _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
-          return location.href = '/';
+          return location.href = "/";
         },
         variant: "dark",
         className: "backBtn"
@@ -51879,7 +51879,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "profileView-container"
       }, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Group, {
         controlId: "formBasicUsername"
-      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
+      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username: ", Username), _react.default.createElement(_reactBootstrap.Form.Control, {
         placeholder: Username,
         onChange: function onChange(e) {
           _this3.setState({
@@ -52000,7 +52000,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/movie-view/movie-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/movie-view/movie-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52245,7 +52245,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/login-view/login-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/login-view/login-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52382,7 +52382,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/registration-view/registration-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/registration-view/registration-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52655,7 +52655,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/director-view/director-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/director-view/director-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52783,7 +52783,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/genre-view/genre-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/genre-view/genre-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52907,7 +52907,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53265,7 +53265,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.jsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -53335,7 +53335,7 @@ var MovieHunt = /*#__PURE__*/function (_React$Component) {
 var container = document.getElementsByClassName('app-container')[0]; // Tell React to render the app in the root DOM element
 
 _reactDom.default.render(_react.default.createElement(MovieHunt), container);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","../components/main-view/main-view":"../components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","../components/main-view/main-view":"../components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -53363,7 +53363,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45113" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64871" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -53539,5 +53539,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map

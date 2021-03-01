@@ -1,12 +1,12 @@
-import React from 'react';
-import { Container, Button, Row, Col, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import './profile-view.scss';
-import axios from 'axios';
-import { MovieCard } from '../movie-card/movie-card';
-import { setUser } from '../../src/actions/actions';
-import { LoadingView } from '../loading-view/loading-view';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Container, Button, Row, Col, Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import "./profile-view.scss";
+import axios from "axios";
+import { MovieCard } from "../movie-card/movie-card";
+import { setUser } from "../../src/actions/actions";
+import { LoadingView } from "../loading-view/loading-view";
+import PropTypes from "prop-types";
 
 class ProfileView extends React.Component {
   constructor(props) {
@@ -32,12 +32,12 @@ class ProfileView extends React.Component {
     axios
       .post(
         `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
-          'user'
+          "user"
         )}/favorite/remove/${movie._id}`
       )
       .then((res) => {
         this.props.setUser(res.data);
-        alert(movie.Title + ' has been removed from your favorite list');
+        alert(movie.Title + " has been removed from your favorite list");
       })
       .catch(function (error) {
         console.log(error);
@@ -66,7 +66,7 @@ class ProfileView extends React.Component {
     axios
       .put(
         `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
-          'user'
+          "user"
         )}`,
         {
           Username: username,
@@ -76,7 +76,7 @@ class ProfileView extends React.Component {
         }
       )
       .then(() => {
-        alert(username + ' has been updated');
+        alert(username + " has been updated");
       })
       .catch(function (error) {
         console.log(error);
@@ -95,14 +95,14 @@ class ProfileView extends React.Component {
     axios
       .delete(
         `https://moviehunt-gc.herokuapp.com/users/${localStorage.getItem(
-          'user'
+          "user"
         )}`
       )
       .then(() => {
-        alert(username + ' has been deleted');
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        window.location.pathname = '/';
+        alert(username + " has been deleted");
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        window.location.pathname = "/";
       })
       .catch(function (error) {
         console.log(error);
@@ -135,17 +135,18 @@ class ProfileView extends React.Component {
         </div>
       );
     return (
-      <Container className='profileView'>
+      <Container className="profileView">
         <Button
-          onClick={() => (location.href = '/')}
-          variant='dark'
-          className='backBtn'>
-          <i className='fas fa-arrow-left'></i> Back
+          onClick={() => (location.href = "/")}
+          variant="dark"
+          className="backBtn"
+        >
+          <i className="fas fa-arrow-left"></i> Back
         </Button>
-        <Row className='profileView-container'>
+        <Row className="profileView-container">
           <Form>
-            <Form.Group controlId='formBasicUsername'>
-              <Form.Label>Username</Form.Label>
+            <Form.Group controlId="formBasicUsername">
+              <Form.Label>Username: {Username}</Form.Label>
               <Form.Control
                 placeholder={Username}
                 onChange={(e) => {
@@ -156,11 +157,11 @@ class ProfileView extends React.Component {
                 }}
               />
             </Form.Group>
-            <Form.Group controlId='formBasicPassword'>
+            <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type='password'
-                placeholder='Password'
+                type="password"
+                placeholder="Password"
                 onChange={(e) => {
                   this.setState({ Password: e.target.value });
                   if (!e.target.value) {
@@ -170,10 +171,10 @@ class ProfileView extends React.Component {
               />
             </Form.Group>
 
-            <Form.Group controlId='formBasicEmail'>
+            <Form.Group controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
-                type='email'
+                type="email"
                 placeholder={Email}
                 onChange={(e) => {
                   this.setState({ Email: e.target.value });
@@ -183,10 +184,10 @@ class ProfileView extends React.Component {
                 }}
               />
             </Form.Group>
-            <Form.Group controlId='formBasicBirthday'>
+            <Form.Group controlId="formBasicBirthday">
               <Form.Label>Birthday</Form.Label>
               <Form.Control
-                type='date'
+                type="date"
                 placeholder={Birthday}
                 onChange={(e) => {
                   console.log(e.target.value);
@@ -198,11 +199,11 @@ class ProfileView extends React.Component {
                 }}
               />
             </Form.Group>
-            <Row className='profileView-btnContainer'>
+            <Row className="profileView-btnContainer">
               <Button
-                className='profileView-updateBtn btn-dark'
-                variant='btn-dark'
-                type='submit'
+                className="profileView-updateBtn btn-dark"
+                variant="btn-dark"
+                type="submit"
                 onClick={(e) => {
                   e.preventDefault();
                   this.updateUser(
@@ -211,17 +212,19 @@ class ProfileView extends React.Component {
                     this.state.Email,
                     this.state.Birthday
                   );
-                }}>
+                }}
+              >
                 Update
               </Button>
               <Button
-                className='profileView-closeBtn btn-dark'
-                variant='btn-dark'
-                type='submit'
+                className="profileView-closeBtn btn-dark"
+                variant="btn-dark"
+                type="submit"
                 onClick={(e) => {
                   e.preventDefault();
                   this.deleteUser(Username);
-                }}>
+                }}
+              >
                 Close account
               </Button>
             </Row>
@@ -231,11 +234,12 @@ class ProfileView extends React.Component {
         <Row>
           {fav.map((m, index) => {
             return (
-              <Col className='profile-movieCard' sm='4' key={index}>
+              <Col className="profile-movieCard" sm="4" key={index}>
                 <Button
                   onClick={() => this.deleteFav(m, index)}
-                  variant='dark'
-                  className='profile-deleteBtn'>
+                  variant="dark"
+                  className="profile-deleteBtn"
+                >
                   Delete
                 </Button>
                 <MovieCard movie={m} key={index} />
